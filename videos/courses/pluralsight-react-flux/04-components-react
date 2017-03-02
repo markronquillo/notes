@@ -1,0 +1,81 @@
+Components React
+-----------------
+
+Create our first React components
+Setup custom routing
+Create centralized layout
+Discuss naming convertions
+
+#### Naming Conventions
+
+chatApp.js -- camelCase
+
+#### Summary
+
+We can create a react component by
+
+```jsx
+
+var React = require('react');
+var Navigation = require('./components/common/navigation');
+
+var Home = React.createClass({
+	render: function() {
+		return (
+			<div>
+				<Navigation />
+				This is the home page
+			</div>
+		)	
+	}	
+});
+
+React.render(<Home />, document.getElementById('app'));
+```
+
+We learned how to implement a simple routing by attaching an event listener on hashchange event.
+
+```jsx
+
+// in this case we create an app component
+// that renders the corresponding `component` based
+// on the url hash.
+var App = React.createClass({
+	var Child;
+
+	switch(this.props.route) {
+		case 'about': Child = About; break
+		default: Child = Home;
+	}
+	return (
+		<div>
+			<Child />
+		</div>
+	)
+});
+
+var render = function() {
+	var route = window.location.hash.substr(1);
+	React.render(<App route={route}, document.getElementById('app'));
+}
+window.addEventListener('hashchange', render);
+render();
+
+```
+
+
+I learned how to copy images content from source to dist
+```js
+
+gulp.task('images', function() {
+	gulp.src(config.paths.images) // = ./src/images/*
+		.pipe(gulp.dest(config.paths.dist) + '/images')
+		.pipe(connect.reload())
+		;
+});
+
+```
+
+
+
+
