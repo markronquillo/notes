@@ -30,3 +30,14 @@ export function deleteAuthor(authorId) {
 	}
 }
 ```
+
+
+A thunk always returns a function that accepts dispatch.
+
+```
+export loadCourses() {
+	return function(dispath) {
+		
+	}
+}
+```
