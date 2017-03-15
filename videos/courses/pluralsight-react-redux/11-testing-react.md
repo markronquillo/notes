@@ -33,7 +33,7 @@ React Test Utils
 Enzyme
 
 
---> Mocha + Expect + Enzyme
+--> __Mocha + Expect + Enzyme__
 
 
 #### Where to Test
