@@ -10,7 +10,6 @@ var store = require('configureStore').configure();
 
 import TodoApp from 'TodoApp';
 
-
 store.subscribe(() => {
 	var state = store.getState();
 
@@ -19,9 +18,7 @@ store.subscribe(() => {
 	TodoAPI.setTodos(state.todos);
 });
 
-var initialTodos = TodoAPI.getTodos();
-store.dispatch(actions.addTodos(initialTodos));
-
+store.dispatch(actions.startAddTodos());
 
 // Load foundation
 $(document).foundation();

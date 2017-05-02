@@ -22,9 +22,6 @@ describe('Todo', () => {
 		var $el = $(ReactDOM.findDOMNode(todo));
 		TestUtils.Simulate.click($el[0]);
 
-		expect(spy).toHaveBeenCalledWith({
-			type: 'TOGGLE_TODO',
-			id: todoData.id
-		});
+		expect(spy).toHaveBeenCalled();
 	});
 });

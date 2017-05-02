@@ -2,6 +2,9 @@ var expect = require('expect');
 var df = require('deep-freeze-strict');
 
 var reducers = require('reducers');
+
+import moment from 'moment';
+
 describe('Reducers', () => {
 
 	describe('searchTextReducer', () => {
@@ -31,18 +34,24 @@ describe('Reducers', () => {
 		it('should add todo', () => {
 			var action = {
 				type: 'ADD_TODO',
-				text: 'Something todo'
+				todo: {
+					text: 'test'
+				}
 			};
 			var res = reducers.todosReducer(df([]), df(action));
 
-			expect(res[0].text).toEqual(action.text);
+			expect(res[0].text).toEqual(action.todo.text);
 			expect(res.length).toEqual(1);
 		})
 
 		it('should toggle todo', () => {
 			var action = {
-				type: 'TOGGLE_TODO',
-				id: 1
+				type: 'UPDATE_TODO',
+				id: 1,
+				updates: {
+					completed: true,
+					completedAt: moment().unix()
+				}
 			};
 			var initialTodo = [{
 				id: 1,

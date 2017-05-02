@@ -15,6 +15,10 @@ describe('AddTodo', () => {
 
 	it('should dispatch ADD_TODO action', () => {
 		var spy = expect.createSpy();
+		var todo = {
+			text: 'Check mail',
+			completed: false	
+		}
 		var addTodo = TestUtils.renderIntoDocument(
 			<AddTodo dispatch={spy} />
 		);
@@ -22,10 +26,7 @@ describe('AddTodo', () => {
 		addTodo.refs.todoText.value = 'Check mail';
 		
 		TestUtils.Simulate.submit($el.find('form')[0]);
-		expect(spy).toHaveBeenCalledWith({
-			type: 'ADD_TODO',
-			text: 'Check mail'
-		});
+		expect(spy).toHaveBeenCalled();
 	});
 
 	it('should not dispatch ADD_TODO action if invalid data', () => {

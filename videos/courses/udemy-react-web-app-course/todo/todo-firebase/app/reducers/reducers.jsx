@@ -24,28 +24,19 @@ export var todosReducer = (state = [], action) => {
 		case 'ADD_TODO':
 			return [
 				...state,
-				{
-					id: uuid(),
-					text: action.text,
-					completed: false,
-					createdAt: moment().unix(),
-					completedAt: undefined
-				}
+				action.todo
 			];
 		case 'ADD_TODOS':
 			return [
 				...state,
 				...action.todos
 			];
-		case 'TOGGLE_TODO':
+		case 'UPDATE_TODO':
 			return state.map((todo) => {
 				if (todo.id == action.id) {
-					var completed = !todo.completed;
-
 					return {
 						...todo,
-						completed,
-						completedAt: completed ? moment().unix() : undefined
+						...action.updates,
 					}
 				}
 				return todo;
