@@ -37,7 +37,4 @@ Two ways to defer task execution and put it in the queue.
 - `task.delay(10, 20)`
 - `task.apply_async(args=[10, 20], countdown=60)`
 
-
-
-
-
+celery worker -A app.celery --loglevel=info
