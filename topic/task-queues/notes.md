@@ -92,3 +92,8 @@ PREFETCH_MULTIPLIER=1 # this ensures that the worker process can reserve at most
 
 ```
 
+### RealPython - Asynchronous Tasks with Celery and Django
+
+Celery is an async task queue/job queue based on distributed message passing. It is focused on real-time operation, but supports scheduling as well.
+
+
