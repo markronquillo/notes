@@ -1,0 +1,15 @@
+exports[`Voting renders a pair of buttons 1`] = `
+<div
+  className="voting">
+  <button>
+    <h1>
+      Trainspotting
+    </h1>
+  </button>
+  <button>
+    <h1>
+      28 Days Later
+    </h1>
+  </button>
+</div>
+`;
