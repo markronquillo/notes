@@ -97,9 +97,18 @@ The solution we'll use for this is actually quite simple. What we can do is simp
 
 - A client sends an action to the server.
 - The server hands the action to the Redux Store
-- The Store calls the reducer adn the reducer executes the logic related to the action
+- The Store calls the reducer and the reducer executes the logic related to the action.
 - The Store updates its state based on the return value of the reducer.
 - The Store executes the listener function subscribed by the server.
 - The server emits a 'state' event
 - All connected clients - including the one that initiated the original action - receive the new state.
+
+
+## The Client Application
+
+A pure component receives all its data as props, like a function receives all its data as arguments. It should have no side effects, including reading data from anywhere else, initiating network requests etc.
+
+A pure component generally has no internal state, What it renders is fully driven by its input props. Rendering the same pure component twice with the smae props should result in the same UI. There's no hidden state inside the component that would cause the UI to differe between the two renders.
+
+
 
