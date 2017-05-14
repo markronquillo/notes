@@ -1,32 +1,24 @@
 import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
+import Vote from './Vote';
+import Winner from './Winner';
 
 class Voting extends React.Component {
-    getPair = function() {
-        return this.props.pair || [];
-    }
-
-    isDisabled() {
-        return !!this.props.hasVoted;
-    }
-
-    hasVotedFor() {
-        return this.props.hasVoted === entry;
+    constructor(props) {
+        super(props);
+        // this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
     render = function() {
-        return (
-            <div className="voting">
-            {this.getPair().map(entry => 
-                <button key={entry}
-                    onClick={() => this.props.vote(entry)}>
-                    <h1>{entry}</h1>
-                    {this.hasVotedFor(entry) ?
-                        <div className="label">Voted</div>
-                        null}
-                </button>
-            )}
-            </div>
-        );
+      return (
+        <div>
+          {this.props.winner ?
+              <Winner winner={this.props.winner} /> :
+              <Vote {...this.props}  />
+          }
+        </div>
+      );
     }
 }
 

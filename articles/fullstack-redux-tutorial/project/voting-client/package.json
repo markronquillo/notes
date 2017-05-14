@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "chai": "^3.5.0",
+    "immutable": "^3.8.1",
     "react": "^15.5.4",
+    "react-addons-pure-render-mixin": "^15.5.2",
     "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4"
+    "react-test-renderer": "^15.5.4",
+    "sinon": "^2.2.0"
   },
   "devDependencies": {
     "chai-enzyme": "^0.6.1",
