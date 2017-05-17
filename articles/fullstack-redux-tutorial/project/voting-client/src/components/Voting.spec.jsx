@@ -80,7 +80,7 @@ describe('Voting', () => {
 
         let newPair = pair.set(0, 'Sunshine');
         component = shallow(
-            <Vote pair={pair} />,
+            <Vote pair={newPair} />,
             container
         );
         firstButton = component.find('button').at(0); 
