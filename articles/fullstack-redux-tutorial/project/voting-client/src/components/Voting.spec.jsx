@@ -6,7 +6,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { List } from 'immutable';
 
-import Voting from '../../src/components/Voting';
+import { Voting } from '../../src/components/Voting';
 import Vote from '../../src/components/Vote';
 import Winner from '../../src/components/Winner';
 
