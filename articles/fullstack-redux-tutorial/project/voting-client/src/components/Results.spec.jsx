@@ -46,5 +46,16 @@ describe('Results', () => {
 		const winner = component.find('.winner');
 		expect(winner).to.be.ok;
 		expect(winner.text()).to.contain('Trainspotting');
-	})
+	});
+
+	it('invokes the reset callback when reset button is clicked', () => {
+		const onHandleClick = sinon.spy();
+		const pair = List.of('Trainspotting', '28 Days Later');
+		const component = mount(
+			<Results winner={'Trainspotting'} reset={onHandleClick} />
+		);
+		const button = component.find('.reset');
+		button.simulate('click');
+		expect(onHandleClick).to.have.property('callCount', 1);
+	});
 });

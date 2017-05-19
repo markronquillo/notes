@@ -25,7 +25,7 @@ export class Results extends React.Component {
 	render() {
 		return (
 			this.props.winner ? 
-			<Winner winner={this.props.winner} />
+			<Winner winner={this.props.winner} reset={this.props.reset} />
 			:
 			<div className="results">
 				<div className="tally">

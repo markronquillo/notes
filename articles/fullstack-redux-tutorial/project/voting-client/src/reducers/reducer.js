@@ -26,10 +26,25 @@ function resetVote(state) {
 	}
 }
 
+function setHasVoted(state, clientId) {
+
+	if (!state.has('hasVoted')) {
+		const votesState = state.getIn(['vote', 'votes']);
+		if (votesState.has(clientId)) {
+			return state.set('hasVoted', votesState.get(clientId));
+		}
+	}
+	return state
+}
+
 export default function(state = Map(), action) {
 	switch (action.type) {
 		case 'SET_STATE':
 			return resetVote(setState(state, action.state));
+		case 'SET_HAS_VOTED':
+			return setHasVoted(state, action.clientId);
+		case 'SET_CLIENT_ID':
+			return state.set('clientId', action.clientId);
 		case 'VOTE':
 			return vote(state, action.entry);
 	}

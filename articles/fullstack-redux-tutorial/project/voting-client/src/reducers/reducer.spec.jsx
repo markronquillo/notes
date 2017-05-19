@@ -141,4 +141,32 @@ describe('reducer', () => {
 		});
 	});
 
+
+	it('handles SET_HAS_VOTED', () => {
+		const initialState = fromJS({
+			vote: {
+				round: 1,
+				pair: ['Trainspotting', '28 Days Later'],
+				tally: { Trainspotting: 1 },
+				votes: { 'voter1': 'Trainspotting' }
+			},
+		});
+
+		const action = { 
+			type: 'SET_HAS_VOTED', 
+			clientId: 'voter1'
+		};
+
+		const nextState = reducer(initialState, action)	
+		expect(nextState.toJS()).to.deep.equal({
+			vote: {
+				round: 1,
+				pair: ['Trainspotting', '28 Days Later'],
+				tally: { Trainspotting: 1 },
+				votes: { 'voter1': 'Trainspotting' },
+			},
+			hasVoted: 'Trainspotting'
+		});
+	})
+
 });
