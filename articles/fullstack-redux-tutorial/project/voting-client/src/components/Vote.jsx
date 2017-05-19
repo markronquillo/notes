@@ -12,7 +12,8 @@ export default class Vote extends Component {
   }
 
   isDisabled() {
-      return !!this.props.hasVoted;
+    return false;
+    // return !!this.props.hasVoted;
   }
 
   hasVotedFor(entry) {

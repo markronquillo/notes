@@ -119,4 +119,51 @@ This is done by applying the PureRenderMixin that is available as an add-on pack
 
 
 
+### Introducting a Client-Side Redux Store
+
+```json
+{
+    vote: {
+        pair: [
+            'Trainspotting', 
+            'Sunshing' 
+        ],
+        tally: {
+            'Trainspotting': 4
+            'Sunshing': 3
+        }
+    },
+    hasVoted: 'Trainspotting',
+    winner: 'Trainspotting'
+}
+```
+
+The pure/dumb component is fully driven by the props it is given. It is the component equivalent of a pure function.
+
+The connected/smart component, on the other hand, wraps the pure version with some logic that will keep it in sync with the changing state of the Redux Store. That logic is provided by react-redux.
+
+
+### Setting up the Socket.io Client
+
+The server is already prepared to take incoming socket connections and emit the voting state to them. The client, on the other hand, has a Redux store into which we could easily dispatch incoming data. All we need to do is to draw the connection.
+
+### Sending Actions To The Server Using Redux Middleware
+
+Note the difference between Redux middleware and Redux listeners: Middleware are called before an action hits the store, and they may affect what happens to the action. Listeners are called after an action has been dispatched, and they can't really do anything about it. Different tools for different purposes.
+
+
+### Summary
+
+The user clicks a vote button. A VOTE action is dispatched.
+
+The remote action middleware sends the action over the Socket.io connection.
+
+The client-side Redux store handles the action, causing the local hasVote state to be set.
+
+When the message arrives on the server, the serverside Redux store handles the action, updating the vote in the tally.
+The listener on the serverside Redux store broadcasts a state snapshot to all connected clients.
+
+A SET_STATE action is dispatched to the Redux store of every connected client.
+
+The Redux store of every connected client handles the SET_STATE action with the updated state from the server.
 
