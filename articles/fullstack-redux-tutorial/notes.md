@@ -110,5 +110,13 @@ A pure component receives all its data as props, like a function receives all it
 
 A pure component generally has no internal state, What it renders is fully driven by its input props. Rendering the same pure component twice with the smae props should result in the same UI. There's no hidden state inside the component that would cause the UI to differe between the two renders.
 
+## Immutable Data And Pure Rendering
+
+If we only use immutable data in component props, and write the component as a pure component, we can have React use a more efficient strategy for detecting changes in the props.
+
+This is done by applying the PureRenderMixin that is available as an add-on package. When this mixin is added to a component, it changes the way React checks for changes in the component's props (and state). Instead of a deep compare it does a shallow compare, which is much, much faster.
+
+
+
 
 
