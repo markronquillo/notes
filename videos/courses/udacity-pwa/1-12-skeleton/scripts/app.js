@@ -197,6 +197,8 @@
   app.onLoad = function() {
     localforage.getItem('cities')
       .then(function(cities) {
+        if (!cities) return;
+        
         const keys = Object.keys(cities);
 
         keys.forEach(function(key) {
@@ -229,4 +231,12 @@
 
   // app.updateForecastCard(injectedForecast);
 
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(registration) {
+        console.log('Service Worker Registered', registration);
+      });
+  }
+
+  
 })();
