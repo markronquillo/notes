@@ -106,6 +106,16 @@
       app.visibleCards[data.key] = card;
       card.querySelector('.remove').onclick = app.removeSelectedCity(data.key).bind(card);
     }
+
+    // Verify data is newer than what we already have, if not, bail.
+    var dateElem = card.querySelector('.date');
+    if (dateElem.getAttribute('data-dt') >= data.currently.time) {
+      return;
+    }
+
+    dateElem.setAttribute('data-dt', data.currently.time);
+    dateElem.textContent = new Date(data.currently.time * 1000);
+
     card.querySelector('.description').textContent = data.currently.summary;
     card.querySelector('.date').textContent =
       new Date(data.currently.time * 1000);
@@ -155,6 +165,24 @@
   // Gets a forecast for a specific city and update the card with the data
   app.getForecast = function(key, label) {
     var url = weatherAPIUrlBase + key + '.json';
+
+    if ('caches' in window) {
+      caches.match(url).then(function(response) {
+        if (response) {
+          response.json().then(function(json) {
+            if (app.hasRequestPending) {
+              console.log('updated from cache');
+              json.key = key;
+              json.label = label
+              app.updateForecastCard(json);
+            }
+          });
+        }
+      });
+    }
+
+    app.hasRequestPending = true;
+
     // Make the XHR to get the data, then update the card
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
@@ -163,6 +191,7 @@
           var response = JSON.parse(request.response);
           response.key = key;
           response.label = label;
+          app.hasRequestPending = false;
           app.updateForecastCard(response);
         }
       }
@@ -219,6 +248,7 @@
           if (cities && key in cities) {
             app.container.removeChild(card);
             delete cities[key];
+            delete app.visibleCards[key];
             localforage.setItem('cities', cities);
           }
         }).catch(function(err) {
@@ -232,7 +262,7 @@
   // app.updateForecastCard(injectedForecast);
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('/service-worker.js')
       .then(function(registration) {
         console.log('Service Worker Registered', registration);
       });

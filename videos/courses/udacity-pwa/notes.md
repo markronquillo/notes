@@ -198,6 +198,151 @@ self.addEventListener('fetch', function(e) {
 
 ### Caching Strategies
 
+Service workers allows you to decide how you cache your files.
+
+- Cache First, then Network.
+
+- Network First, Then cache
+
+  This approach is for scenarios where the network fails to get the data and instead of displaying no data, we display the cached data, which is probably stale.
+
+- Cache Only
+  Saving Battery
+
+- Network Only
+
+- Cache and Network Race
+
+- Cache then Network
+  We first load the cache and make a network request at the same time,
+  After the network request is done, we update the cache and the displayed data.
+
+
+### Intercept The Request and Cache
+
+We first get the cached data then make a request for the new data.
+
+```javascript
+// sw.js
+onfetch = function(e) {
+  var url = e.request.url;
+  if (url === 'app.html') {
+    e.respondWith(
+      caches.match(e.request)
+    );
+  }
+
+  if (url == 'content.json') {
+    // go to the network for updates
+    // then cache response adn return
+    e.respondWith(
+      fetch(...).then(function(r) {
+        cache.put(url, r.clone())
+        return r;
+      });
+    )
+  }
+}
+
+// app.js
+app.getForecast = function(key, label) {
+  var url = baseURL + key + '.json';
+  if ('caches' in window) {
+    caches.match(url).then(function(response) {
+      if (response)  {
+        response.json().then(function(json) {
+          if (app.hasRequestPending) {
+            console.log('updated from cache');
+            json.key = key;
+            json.label = label;
+            app.updateForecastCard(json);
+          }
+        });
+      }
+    })
+  }
+
+  app.hasRequestPending = true;
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      if (request.status === 200) {
+        var response = JSON.parse(request.response);
+        response.key = key;
+        response.label = label;
+        app.hasRequestPending = false;
+        app.updateForecastCard(response);
+      }
+    }
+  }
+}
+```
+
+Separate App Shell to Cache Data.
+
+Update Your Project: Caching Strategies
+
+1. in getForecast, set to get the cache version first then make a network request
+2. in the service worker, cache the data in a different name.
+
+sw-precache
+
+# Web App Manifest
+
+```json
+{
+  "name": "Weather",
+  "short_name": "Weather",
+  "start_url": "/index.html",
+  "icons": [...],
+  "background_color": "#3E4EB8",
+  "theme_color": "#2F3BA2",
+  "display": "standalone",
+  "orientation": "portrait"
+}
+```
+
+name and short_name is required
+
+short_name - use in the homescreen
+
+start_url - url when launched in the homescreen, you can add querystring to do some analytics
+
+icons: [{
+  "src": "/icons/icon-128.png",
+  "sizes": "128x128",
+  "type": "image/png"
+}]
+
+Web App Manifest Icon Sizes: at least provide icons in these sizes.
+
+- 48x48, 96x96, 128x128, 144x144, 192x192, 256x256, 384x384, 512x512
+
+background_color: splash screen
+theme_color: app color, bar
+
+__Web Manifest Validator__
+
+<link rel="manifest" href="manifest.json">
+
+### Web App Install Banners
+
+Prompting your user to add your webapp to their homescreen.
+
+Requirements:
+1. Service Worker
+2. Web App Manifest File
+3. Engaged User
+
+`onbeforeinstallprompt`
+
+You can add analytics to the banner.
+
+### Add To Home Screen Elements for Safari
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 
 
 
