@@ -198,34 +198,98 @@ Amazon Cognito Federated Identities enables develoeprs to create unique identiti
 
 
 ```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "mobileanalytics:PutEvents",
-        "cognito-sync:*",
-        "cognito-identity:*"
-      ],
-      "Resource": [
-        "*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:*"
-      ],
-      "Resource": [
-        "arn:aws:s3:::markronquillo-notes-app/${cognito-identity.amazonaws.com:sub}*"
-      ]
-    }
-  ]
-}
+	{
+	  "Version": "2012-10-17",
+	  "Statement": [
+	    {
+	      "Effect": "Allow",
+	      "Action": [
+	        "mobileanalytics:PutEvents",
+	        "cognito-sync:*",
+	        "cognito-identity:*"
+	      ],
+	      "Resource": [
+	        "*"
+	      ]
+	    },
+	    {
+	      "Effect": "Allow",
+	      "Action": [
+	        "s3:*"
+	      ],
+	      "Resource": [
+	        "arn:aws:s3:::markronquillo-notes-app/${cognito-identity.amazonaws.com:sub}*"
+	      ]
+	    }
+	  ]
+	}
 ```
+
+#### Cognito User Pool vs Identity Pool
+
+Amazon Cognito User Pool makes it easy for developers to add sign-up and sign-in functionality to web and mobile applications. It serves as your own identity provider to maintain a user directory. It supports user registration and sign-in, as well as provisioning identity tokens for signed-in users.
+
+
+Amazon Cognito Federated Identities enables developers to create unique identities for your users and authenticate them with federated identity providers. With a federated identity, you can obtain temporary, limited-privilege AWS credentials to securely access other AWS services such as Dynamo DB, S3, API Gateway.
+
+
+User Pool - handles store user, registration and authentication.
+
+Identity Pool - is a way to authorize your users to use the various AWS services. Say you wanted to allow a user to have access to your S3 buket so that they could upload a file; you could specify that while creating an Identity Pool.
+
 
 #### Set up the Serverless Framework
 
+`serverless create --template aws-nodejs`
+
+The command above will generate two files
+
+1. handler.js: file contains actual code for hte services/functions that will be deployed to AWS Lambda.
+
+2. serverless.yml file contains the configuration on what AWS services Serverless will provision and how to configure them.
+
+RUN `npm init -y`
+
+RUN `npm install aws-sdk --save-dev`
+RUN `npm install uuid --save`
 
 
+#### Add Support for ES6/ES7 JavaScript
+
+Install Babel and Webpack
+
+RUN `npm install --save-dev \
+    babel-core \
+    babel-loader \
+    babel-plugin-transform-runtime \
+    babel-preset-es2015 \
+    babel-preset-stage-3 \
+    serverless-webpack \
+    glob \
+    webpack \
+    webpack-node-externals`
+
+RUN `npm install --save babel-runtime`
+
+
+##  Building the Backend
+
+#### Add a create note API
+
+The create note endpoint will take the note object as the input and store it in the database with a new id. The note object will contain the `content` field and `attachment` field (url).
+
+CREATE `create.js` file
+
+CONFIGURE api endpoint.
+
+REMEMBER that create.js (and other endpoint js) are server functions.
+
+REFACTOR our code
+
+RUN `serverless webpack invoke --function create --path tests/create.json`
+
+RUN `serverless webpack invoke --function get --path tests/get.json`
+
+RUN `$ serverless webpack invoke --function list --path tests/list.json`
+
+RUN `serverless webpack invoke --function update --path tests/update.json`
