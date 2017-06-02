@@ -78,7 +78,7 @@ functions:
           method: delete
           cors: true
           authorizer:
-          arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
+            arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
     
 
 
