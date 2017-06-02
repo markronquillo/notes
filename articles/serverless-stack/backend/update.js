@@ -12,7 +12,7 @@ export async function main(event, context, callback) {
 
 		// 'UpdateExpression' efines the attributes to be updated
 		// 'ExpressionAttributeValues' define the value in the update expression
-		UpdateExpression: 'SET content = : content, attachment = :attachment',
+		UpdateExpression: 'SET content = :content, attachment = :attachment',
 		ExpressionAttributeValues: {
 			':attachment': data.attachment ? data.attachment : null,
 			':content': data.content ? data.content : null,
@@ -26,6 +26,7 @@ export async function main(event, context, callback) {
 		callback(null, success({ status: true }));
 	}
 	catch(e) {
+		console.log(e);
 		callback(null, failure({ status: false }));
 	}
 };

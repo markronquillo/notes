@@ -38,38 +38,48 @@ functions:
     handler: create.main
     events:
       - http:
-        path: notes
-        method: post
-        cors: true
-        authorizer:
-          arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
+          path: notes
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
   get:
     handler: get.main
     events:
       - http:
-        path: notes/{id}
-        method: get
-        cors: true
-        authorizer:
-          arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
+          path: notes/{id}
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
   list:
     handler: list.main
     events:
       - http:
-        path: notes
-        method: get
-        cors: true
-        authorizer:
-          arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
+          path: notes
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
   update:
     handler: update.main
     events:
       - http:
-        path: notes/{id}
-        method: put
-        cors: true
-        authorizer:
+          path: notes/{id}
+          method: put
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
+  delete:
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
+          cors: true
+          authorizer:
           arn: arn:aws:cognito-idp:us-east-1:372446608081:userpool/us-east-1_72X5RNuLb
-          
+    
+
 
           

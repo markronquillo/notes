@@ -169,7 +169,7 @@ Create User
 ```
  aws cognito-idp sign-up \
   --region us-east-1 \
-  --client-id YOUR_COGNITO_APP_CLIENT_ID \
+  --client-id 56mhb72fet3aeab3pfuce4jg49 \
   --username admin@example.com \
   --password Passw0rd! \
   --user-attributes Name=email,Value=admin@example.com
@@ -179,7 +179,7 @@ Verify a User
 ```
 aws cognito-idp admin-confirm-sign-up \
  --region us-east-1 \
- --user-pool-id YOUR_USER_POOL_ID \
+ --user-pool-id us-east-1_72X5RNuLb \
  --username admin@example.com
 ```
 
@@ -293,3 +293,37 @@ RUN `serverless webpack invoke --function get --path tests/get.json`
 RUN `$ serverless webpack invoke --function list --path tests/list.json`
 
 RUN `serverless webpack invoke --function update --path tests/update.json`
+
+RUN `serverless webpack invoke --function delete --path tests/delete.json`
+
+
+#### Deploy (to AWS Lambda)
+
+RUN `serverless deploy`
+
+After that you will be provided a series of endpoints for each handler
+
+https://jxczb5zwna.execute-api.us-east-1.amazonaws.com/prod/
+
+We then authenticate using created admin user earlier
+
+```
+aws cognito-idp admin-initiate-auth \
+  --region us-east-1 \
+  --user-pool-id us-east-1_72X5RNuLb \
+  --client-id 56mhb72fet3aeab3pfuce4jg49 \
+  --auth-flow ADMIN_NO_SRP_AUTH \
+  --auth-parameters USERNAME=admin@example.com,PASSWORD=Passw0rd!
+```
+
+This will return an array of tokens, get the IdToken.
+
+```
+eyJraWQiOiJjY2lqNjlSUmxGSmJqMHVDVVFFaitJVnFjck9NcmdyelNNTlJLUkVsWnNjPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJjMzIzZGNkZC1iZDg1LTRmYjItYjY1OC1hZGM5Yjc2YjM0MmQiLCJhdWQiOiI1Nm1oYjcyZmV0M2FlYWIzcGZ1Y2U0amc0OSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE0OTYzMDAxNzYsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xXzcyWDVSTnVMYiIsImNvZ25pdG86dXNlcm5hbWUiOiJhZG1pbkBleGFtcGxlLmNvbSIsImV4cCI6MTQ5NjMwMzc3NiwiaWF0IjoxNDk2MzAwMTc2LCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIn0.K3cHWFgqnyFzBBc4LXkN7VVHNU36o3u8Gu0JXtoeeXyVhEZIdUUfg00NvHYyXF3FA4C5vSBTIuBh8qXeeu_r5jG6jMR1Ssvb8wFCfDGKskzTfnMLSWXBI9oFz2Vp-m6PGKT85PYCnyaaOYDs_z5Nbg-cUKgUmIp0hnarGPuemPZ6MpdsP5VCZeo8ZKmdUCbQajs_ip1njSv8ijI4Ya3V2cu7iTQhakwm7eduRfLeXKD2x_WPtn2s-17kDQDH5xG20br1vytBT3VTqknZ9PqKESvcy-W6NGU8pJU9HBQnP_yggG-pdDT0YR8q0VFvSPcJJMhk_inVw8_3d8etAYIKEg
+```
+
+```
+curl https://jxczb5zwna.execute-api.us-east-1.amazonaws.com/prod/notes \
+  -H "Authorization:eyJraWQiOiJjY2lqNjlSUmxGSmJqMHVDVVFFaitJVnFjck9NcmdyelNNTlJLUkVsWnNjPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJjMzIzZGNkZC1iZDg1LTRmYjItYjY1OC1hZGM5Yjc2YjM0MmQiLCJhdWQiOiI1Nm1oYjcyZmV0M2FlYWIzcGZ1Y2U0amc0OSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE0OTYzMDAxNzYsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xXzcyWDVSTnVMYiIsImNvZ25pdG86dXNlcm5hbWUiOiJhZG1pbkBleGFtcGxlLmNvbSIsImV4cCI6MTQ5NjMwMzc3NiwiaWF0IjoxNDk2MzAwMTc2LCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIn0.K3cHWFgqnyFzBBc4LXkN7VVHNU36o3u8Gu0JXtoeeXyVhEZIdUUfg00NvHYyXF3FA4C5vSBTIuBh8qXeeu_r5jG6jMR1Ssvb8wFCfDGKskzTfnMLSWXBI9oFz2Vp-m6PGKT85PYCnyaaOYDs_z5Nbg-cUKgUmIp0hnarGPuemPZ6MpdsP5VCZeo8ZKmdUCbQajs_ip1njSv8ijI4Ya3V2cu7iTQhakwm7eduRfLeXKD2x_WPtn2s-17kDQDH5xG20br1vytBT3VTqknZ9PqKESvcy-W6NGU8pJU9HBQnP_yggG-pdDT0YR8q0VFvSPcJJMhk_inVw8_3d8etAYIKEg" \
+  -d "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
+```
