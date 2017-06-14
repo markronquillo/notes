@@ -101,9 +101,54 @@ story.chapterUrls.forEach(function(chapterUrl) {
 
 This will create `sequence1 (then) sequence2 (then) ... (then) sequencen`
 
+The problem with the solution above is that we are fetching the chapters one at a time. Chapter 2 will only be fetched after Chapter 1 fetch finished.
 
+Another solution is to use `Promise.all` where it we can simultaneously promises and wait for all of them to finish then process the results.
 
+```javascript
+getJSON('story.json').then(function(story) {
 
+    return Promise.all(
+        story.chapterUrls.map(getJSON)
+    );
+}).then(function(chapters) {
+    chapters.forEach(function(chapter) {
+        addHtmlToPage(chapter.html);
+    });
+    addTextToPage('All done');
+})
+.catch(function(err) {
+    addTextToPage('Broken!');
+})
+.then(function() {
+    document.querySelector('.spinner').style.display = 'none';
+})
+;
+```
+
+However, we can still improve the performance by simultaneously fetching each chapter but still render each chapter in order
+
+```javascript
+getJSON('story.json').then(function(story) {
+    addHtmlToPage(story.heading);
+
+    return story.chapterUrls.map(getJSON)
+        .reduce(function(sequence, chapterPromise) {
+            return sequence.then(function() {
+                return chapterPromise;
+            })
+            .then(function(chapter) {
+                addHtmlToPage(chapter.html);
+            })
+        }, Promise.resolve());
+})
+.then(function() {
+    addTextToPage('All Done');
+})
+.catch(function(err) {
+    ....
+})
+```
 
 
 
