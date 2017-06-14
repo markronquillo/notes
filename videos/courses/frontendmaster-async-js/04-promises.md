@@ -136,11 +136,48 @@ chained promises
 Exercise 5: is like 3 but using ASQ
 Exercise 6: is like 4 but using ASQ
 
-```
+```javascript
 // ex5
 function getFile(file) {
+	return ASQ(function(done) {
+		fakeAjax(file, done);
+	});
 }
+
+getFile("file1")
+	.val(output)
+	.seq( getFile("file2") )
+	.val(output)
+	.seq( getFile("file3") )
+	.val(output)
+	.val(function() {
+		output('Complete');
+	})
 ```
+
+```javascript
+// ex6
+function getFile(file) {
+	return ASQ(function(done) {
+		fakeAjax(file, done);
+	});
+}
+
+ASQ()
+.seq(
+	...(["file1", "file2", "file3"]
+		.map(getFile)
+		.map(function(sq) {
+			return sq.val(output);
+		})
+	)
+)
+.val(function() {
+	output('Complete');
+});
+```
+
+_davidwalsh.name/asyncquence-part-1_
 
  
 

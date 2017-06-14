@@ -38,10 +38,10 @@ function getFile(file) {
 ["file1", "file2", "file3"].map(getFile)
 	.reduce(function(chain, pr) {
 		return chain
-						.then(function() {
-							return pr;
-						})
-						.then(output);
+			.then(function() {
+				return pr;
+			})
+			.then(output);
 }, Promise.resolve())
 	.then(function() { output('completed'); });
 
