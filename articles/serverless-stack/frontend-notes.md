@@ -160,4 +160,46 @@ This API Gateway (right now) create new note using the endpoint we have made ear
 
 #### Upload a File to S3
 
+Created another function in our `awsLib.js` file that uploads our file in S3 and saves the url to our notes app.
+
+#### Clear AWS Credentials during logout
+
+`AWS.config.credentials.clearCachedId();`
+
+
+## List all notes
+
+In our `Home.js` file, we defined two render functions that renders two different markups.
+
+We created a function that fetches all notes and display it in the Home Component when a user is logged in.
+
+
+## Display a Note
+
+We need to display a note if the route `/note/:id` was accessed. 
+
+We need to load the note given the :id value and save it in the internal state for us to display.
+
+We get the note id from the url by:
+```javascript
+getNote() {
+  return invokeApiGateway({ path: `/notes/${this.props.match.params.id}`}, this.props.userToken);
+}
+```
+
+#### Save change to a note
+
+Whenever we want to save the changes to a note, we check if we need to upload another file to S3 again (in case the attachment is changed). 
+
+Saving a note is the same as what we did in NewNote.js
+
+#### Deleting a note
+
+We call the corresponding API gateway for deleting a note.
+
+## Setup Secure Pages
+
+
+
+
 

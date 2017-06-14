@@ -6,6 +6,7 @@ import Login from './containers/Login';
 import Signup from './containers/Signup';
 import Confirmation from './containers/Confirmation';
 import NewNote from './containers/NewNote';
+import Notes from './containers/Notes';
 
 import NotFound from './containers/NotFound';
 
@@ -18,6 +19,7 @@ export default ({ childProps }) => (
     <AppliedRoute  path="/signup" exact component={Signup} props={childProps} />
     <AppliedRoute  path="/confirmation" exact component={Confirmation} props={childProps} />
     <AppliedRoute  path="/notes/new" exact component={NewNote} props={childProps} />
+    <AppliedRoute  path="/notes/:id" exact component={Notes} props={childProps} />
     <Route component={NotFound} />
   </Switch>
 );
