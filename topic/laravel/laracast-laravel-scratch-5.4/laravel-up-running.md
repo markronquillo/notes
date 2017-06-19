@@ -100,12 +100,116 @@ This is easy but how about those classes with dependencies that can't be typehin
 
     Facades are simple shortcuts that make it easy to use static calls on a root namespaces class to call nonstatic methods on classes resolved out of the container.
 
+# Chapter 12: Testing
 
+### Tools
 
+`PHPUnit`, `Mockery`, `PHPSpec`
 
+### Terms
 
+`Unit Tests` - targets small, relatively isolated units -- a class or method usually
 
+`Integration tests` - test the way individual units work together and pass messages.
 
+`Application tests` - often called acceptance or functional tests, application tests the entire behavior of the application, usually at an outer boundary by employing somethign like a document object model (DOM) crawler
 
+### Testing Traits
+
+`WithoutMiddleware` - this will disable all middleware for any test in that class. This means you won't have to worry about the authentication middleware or CSRF protection.
+
+`DatabaseMigrations` - If you import this trait, it will run your entire set of database migrations up before each test and down after each test.
+
+`DatabaseTransactions` - this trait expects your database to be properly migrated before tests start. Then it wraps every test in a database transaction which it rolls back at the end of test.
+
+---
+
+`TestCase`
+
+`$this->visit($uri)`
+
+Mockery -- shouldIgnoreMissing
+```php
+class SlackClient
+{
+    public function send(...) {...}
+}
+
+class Notifier
+{
+    private $slack;
+    public function __construct(SlackClient $slack) 
+    {
+        $this->slack = $slack;
+    }
+
+    public function notifyAdmins($message)
+    {
+        $this->slack->send($message, 'admins');
+    }
+}
+
+// tests/NotifierTest.php
+public function test_notifier_notifies_admins()
+{
+    $slack = Mockery::mock(SlackClient::class)->shouldIgnoreMissing();
+
+    $notifier = new Notifier($slackMock);
+    $notifier->notifyAdmins('Test');
+}
+```
+
+Given the `test_notifier_notifies_admins` test above, no matter what `Notifier` calls on `$slackMock` it'll just accept it and return null.
+
+If we want to actually assert that a call was made to the send() method of Slack client we should use the code below.
+
+```php
+public function test_notifier_notifies_admins()
+{
+    $slackMock = Mockery::mock(SlackClient::class);
+    $slackMock->shouldReceive('send')->once();
+
+    $notifier = new Notifier($slackMock);
+    $notifier->notifyAdmins('Test message');
+}
+```
+
+What if we wanted to use the `IoC` container to resolve our instance of the Notifier?
+
+```php
+public function test_notifier_notifies_admins()
+{
+    $slackMock = Mockery::mock(SlackClient::class);
+    $slackMock->shouldReceive('send')->once();
+
+    app()->isntance(SlackClient::class, $slackMock);
+    $notifier = app(Notifier::class);
+    $notifier->notifyAdmins('Test message');
+}
+```
+
+How about `mocking facades`? We want to test that controller method, and assert that the facade call should be made
+
+```php
+// PeopleController
+public function index()
+{
+
+}
+
+public function test_all_people_route_should_be_cached()
+{
+    $person = factory(Person::class)->make();
+    Cache::shouldReceive('remember')
+        ->once()
+        ->andReturn(collection([$person]));
+    $this->visit('people')->seeJson(['name' => $person->name ]);
+}
+```
+
+# Writing API
+Read this last
+
+# Storage and Retrieval
 
 

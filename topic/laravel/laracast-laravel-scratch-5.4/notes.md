@@ -49,3 +49,41 @@ public function boot()
 Repository - a collection of things, 
 
 ## 24 Service Containers
+
+The service container is the heart of Laravel, any and all registered dependencies will be resolved out of it.
+
+If we want to include `Stripe` class in our service container.
+
+```php
+// bind to the container
+App::bind('App\Billing\Stripe', function() {
+    return \App\Billing\Stripe(config('...'));
+});
+
+// or
+resolve('App\Billing\Stripe');
+
+
+// resolve
+$stripe = App::make('App\Biling\Stripe');
+```
+
+The problem is that we shouldn't just bind our classes to the container anywhere in our code. There is a proper place for the binding.
+
+## 25 Service Provider.
+
+```php
+// in AppServiceProvider.php
+public function register()
+{
+    // insert bind code here
+    $this->app->bind(...);
+}
+```
+
+Inside your Provider file, you can set a property of `$defer = true` to lazy load that file/class. But you cannot do this if you have a boot method defined.
+
+## 25 Sending Email
+
+
+## 26 Markdown Mail
