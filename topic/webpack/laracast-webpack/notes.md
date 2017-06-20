@@ -178,18 +178,58 @@ The problem is, what if we are using `url()` in our css to refer to relative ima
     }
 ```
 
+### How to Strip Unused CSS
+
+Download `PurifyCSSPlugin` and include it in the list plugins.
 
 
+### Long-term caching
 
+`filename: '[name].[chunkhash].js'`
 
+Setup `clean webpack plugin` to delete old generated files
 
+```javascript
+new CleanWebpackPlugin(['dist', 'build'], {
+    root: '/full/project/path',
+    verbose: true,
+    dry: false,
+    exclude: ['shared.js']
+});
+```
 
+### Webpack Manifests
 
+### Image Optimization
 
+`npm install img-loader --save-dev`
 
+Remember that the plugin only optimizes images referenced relatively.
 
+```javascript
 
+{
+    rules: [
+        {
+            test: /\.(svg|eot|ttf|woff|woof2)$/,
+            use: 'file-loader'
+        },
 
+        {
+            test: /\.(png|jpe?g|gif)$/,
+            loaders: [
+                {
+                    loader: 'file-loader',
+                    options: {
+                        name: 'images/[name].[hash].[ext]'
+                    }
+                },
+
+                'img-loader'
+            ]
+        }
+    ]
+}
 
 
  

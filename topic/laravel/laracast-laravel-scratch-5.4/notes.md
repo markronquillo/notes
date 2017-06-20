@@ -85,5 +85,90 @@ Inside your Provider file, you can set a property of `$defer = true` to lazy loa
 
 ## 25 Sending Email
 
+`php artisan make:mail Welcome`
+
+\Mail::to($user)->send(new Welcome);
+
+`Mail Trap`
 
 ## 26 Markdown Mail
+
+`php artisan make:mail WelcomeAgain --markdown="emails.welcome-again"`
+
+If we want to customize the style of the email, we should run the command below and this will copy the mail blade files + css to our resources/.
+
+`php artisan vendor:publish --tag=laravel-mail`
+
+After that we need to specify in `mail.php` that we are using the customized resources and not the default.
+
+Check the documentation for more information. 
+
+
+### Form Requests and Form Objects
+
+```php
+public function rules()
+{
+    return [
+        'name' => 'required'
+        ...
+    ]
+}
+
+public function persist()
+{
+    $user = User::create(
+        $this->only(['name', 'email', 'password'])
+    );
+
+    auth()->login($user);
+    Mail::to($user)->send(new Welcome($user));
+}
+
+```
+
+### Session handling and Flash messaging
+
+```php
+session()->flash('message');
+```
+
+### Tags and Pivot Tables
+
+```php
+Schema::create('post_tag', function(Blueprint $table) {
+    $table->integer('post_id');
+    $table->integer('tag_id');
+    $table->primary(['post_id', 'tag_id']);
+});
+
+// Post.php
+
+public function tags()
+{
+    return $this->belongsToMany(\App\Tag::class);
+}
+
+// usage
+$post->tags->pluck('name'); // will return list of tag names
+
+// n + 1 problem, for every query row, we then query another because we are inefficient haha
+```
+
+### Sorting Posts by Tags
+
+
+### Eventing
+
+`EventServiceProvider.php`
+
+`php artisan make:event`
+
+`php artisan make:listener`
+
+
+
+
+
+
+
