@@ -212,4 +212,106 @@ Read this last
 
 # Storage and Retrieval
 
+This chapter covers filesystem and in-memory storage, file uploads and manipulations, nonrelational data stores, sessions the cache and full-text search.
+
+`Storage` facade
+
+`Flysystem`
+
+`config/filesystems.php`
+
+Using the Storage Facade
+
+```php
+Storage::disk('s3')->get('file.jpg');
+// look at the whole Storage facade interface in the docs
+```
+
+Basic File Uploads and Manipulation
+
+```php
+// Common user upload workflow
+class DogsController
+{
+    public function updatePicture(Request $request, Dog $dog)
+    {
+        Storage::put('dogs/' . $dog->id,
+        file_get_contents($request->file('picture')->getRealPath()));
+
+        // look for Laravel 5.3 store() and storeAs()
+    }
+}
+```
+
+`Intervention` - an image library.
+
+`session()->get('key')`
+
+The difference between `cache` and `session` is that session is per user basis while cache is per application.
+
+`Cache::get('users')` or `cache()->put('key', 'value', Carbon::now()->addDay())`
+
+### Cookies in Laravel
+
+Cookies can exist in three places in Laravel. They can come in via the request, which means the user had the cookie when she visited the page. 
+
+You can get and set cookies in three places. the `Cookie` facade, the `cookie()` global helper and the request and response objects.
+
+Review the `CookieJar` queue.
+
+Setting cookies on response objects.
+```php
+...
+$cookie = cookie('saw-dashboard', true);
+return Response::view('dashboard')
+    ->cookie($cookie);
+```
+
+### Full-Text Search with Laravel Scout
+
+`Laravel Scout` is a separate pacakge that you can bring into your Laravel apps to add full-text search to your Eloquent models. Scout makes it easy to index and search the contents of your Eloquent models, Algolia and ElasticSearch.
+
+`composer require algolia/algoliasearch-client-php`
+
+__Marking Your Model for Indexing__
+
+First, import `Laravel\Scout\Searchable` trait.
+
+Scout subscribes to the create/delete/update events on your marked models. When you create, update or delete any rows, Scout will sync those changes up to Algolia. It'll either make those changes synchronously with your updates or if you configure Scout to use a queue, queue the updates.
+
+`Review::search('Llew')->get();`
+
+# Mail and Notifications
+
+### Mail
+
+`SwiftMailer`
+
+`config/services.php` and `config/services.php`
+
+### Notifications
+
+`php artisan make:notification WorkoutAvailable`
+
+- Sending notifications using the `Laravel\Notifications\Notifiable` trait.
+
+    Assuming that App\User has the Notifiable trait, we can
+    `$user->notify(new WorkoutAvailable($workout));`
+
+- Sending notifications with the Notification facade
+
+    Notification::send(User::all(), new WorkoutAvailable($workout));
+
+## Queues, Job, Events, Broadcasting and the Scheduler
+
+
+
+
+
+
+ 
+
+
+
+
 
