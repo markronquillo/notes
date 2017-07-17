@@ -22,11 +22,12 @@ in your `package.json` file, include the following scripts
 Tree shaking is basically removing unused functions or codes in your build file.
 
 `npm install --save-dev babel-preset-es2015`
-
 in `.babelrc`, change `es2015` to `es2015-webpack`.
 
 
 ## Polyfill promises 
+
+
 
 
 

@@ -309,6 +309,7 @@ Scout subscribes to the create/delete/update events on your marked models. When 
 
 
 
+
  
 
 
