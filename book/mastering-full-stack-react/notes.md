@@ -17,8 +17,17 @@ Falcor is like a glue between
 
 `falcor-express` and `falcor-router`
 
+#### Structure of JWT Token
 
+The header has information that is required on the backend for recognizing what cryptograhic operation to do based on that information
 
+The second part of the token consists of claims provided in JSON format
+
+- Issuer: lets us know who has issued the token
+- Audience: lets us know that this token has to be consumed by our application
+- Issue data: lets us know when the token has been created
+- Expiration date: lets us knoww when the token is expiring so we have to generate a new one
+- Subject: this lets us know which part of tha pp can use the token
 
 
 2. Full-Stack Login and Registration for our Publishing App
