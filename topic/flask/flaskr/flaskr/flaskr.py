@@ -10,6 +10,7 @@ app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'flaskr.db'),
     SECRET_KEY='development key',
     USERNAME='admin',
+    PASSWORD='default'
 ))
 
 # define the environment variable `FLASKR_SETTINGS` 
@@ -60,7 +61,7 @@ def show_entries():
     entries = cur.fetchall()
     return render_template('show_entries.html', entries=entries)
 
-@app.route('/add', method=['POST'])
+@app.route('/add', methods=['POST'])
 def add_entry():
     if not session.get('logged_in'):
         abort(401)
@@ -69,7 +70,7 @@ def add_entry():
                 [request.form['title'], request.form['text']])
     db.commit()
     flash('new entry was successfully posted')
-    return redirect(url_for('show_entris'))
+    return redirect(url_for('show_entries'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -81,7 +82,7 @@ def login():
             error = 'Invalid password'
         else:
             session['logged_in'] = True
-            flash('You were loggged in')
+            flash('You were logged in')
             return redirect(url_for('show_entries'))
     return render_template('login.html', error=error)
 

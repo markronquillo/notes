@@ -23,6 +23,27 @@ export FLASK_DEBUG=true
 
 ## Step 6: The View Functions
 
+## Testing Flask Applications
+
+Testing Tricks
+
+```python
+app = flask.Flask(__name__)
+with app.test_request_context('/?name=Peter'):
+    pass
+```
+
+Application Factories,
+
+`app.preprocess_request()`
+
+`app.process_response(resp)`
+
+### Faking Resources and Context
+
+A common pattern in flask is to store user authorization information adn database connection on the application context or the `flask.g` object.
+
+
 
 
 
