@@ -1,8 +1,9 @@
 import pymysql
 import dbconfig
-connection = pymysql.connect(host='localhost',
+connection = pymysql.connect(host='127.0.0.1',
+                             port=3307,
                              user=dbconfig.db_user,
-                             passwd=dbconfig.db_passwrod)
+                             passwd=dbconfig.db_password)
 
 try:
     with connection.cursor() as cursor:
@@ -15,6 +16,7 @@ try:
                 longitude FLOAT(10, 6),
                 date DATETIME,
                 category VARCHAR(50),
+                description TEXT,
                 updated_at TIMESTAMP,
                 PRIMARY KEY (id)
             ) """
