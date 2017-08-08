@@ -33,6 +33,16 @@ query {
 
 > Schema is what tells GraphQL how our data looks like
 
+> Root Query is like an entry point to our data
+> 	The resolve function in our RootQuery is the actual code
+>	where we get the value for our query
+
+
+_GraphQLSchema_ takes in a RootQuery and returns GraphQLSchema instance.
+
+`json-server`
+
+`nodemon` - restarts our server whenever there are changes
 
 
 # Fetching Data with Queries (12)
