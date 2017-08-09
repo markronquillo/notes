@@ -44,6 +44,35 @@ _GraphQLSchema_ takes in a RootQuery and returns GraphQLSchema instance.
 
 `nodemon` - restarts our server whenever there are changes
 
+You can name your GraphQL query.
+
+```graphql
+query MyQuery {
+	user(id: "1") {
+		name
+	}
+}
+```
+
+```graphql
+{
+	apple: company(id: "1") {	
+		...companyDetails
+	}
+	google: company(id: "2") {
+		...companyDetails
+	}
+}
+```
+
+```graphql
+fragment companyDetails on Company {
+	id
+	name
+	description
+}
+```
+
 
 # Fetching Data with Queries (12)
 
