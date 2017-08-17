@@ -115,11 +115,6 @@ mutation {
 }
 ```
 
-
-
-
-
-
 # Fetching Data with Queries (12)
 
 # The GraphQL Ecosystem (2)
