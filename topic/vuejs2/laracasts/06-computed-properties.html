@@ -1,0 +1,26 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        {{ reversedMessage }}
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+
+            data: {
+                message: 'hello world!'
+            },
+
+            computed: {
+                reversedMessage: function() {
+                    return this.message.split('').reverse().join('')
+                }
+            }
+        })      
+    </script>        
+</body>
+</html>

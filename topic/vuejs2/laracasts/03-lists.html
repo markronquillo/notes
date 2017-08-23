@@ -1,0 +1,26 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <li v-for="name in members">{{name}}</li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                members: [
+                    'Paul',
+                    'Ringo',
+                    'John',
+                    'Mark'
+                ]
+            }
+        })      
+    </script>        
+</body>
+</html>

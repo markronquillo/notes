@@ -1,0 +1,32 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <li v-for="name in members">{{name}}</li>
+        </ul>
+
+        <input type="text" v-model="newName" />
+        <button @click="addName">Add name</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                newName: '',
+                members: ['Paul', 'Ringo', 'John', 'Mark']
+            },
+
+            methods: {
+                addName: function() {
+                    this.members.push(this.newName);
+                    this.newName = '';
+                }
+            }
+        })      
+    </script>        
+</body>
+</html>

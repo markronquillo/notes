@@ -199,6 +199,14 @@ We call the corresponding API gateway for deleting a note.
 
 ## Setup Secure Pages
 
+We want some pages to be inaccessible if there are no user authenticated.
+
+We are going to create two different route components to fix the problem we have.
+
+1. A route called the AuthenticatedRoute, that checks if the user is authenticated before routing.
+2 .And a component called the UnauthenticatedRoute, that ensures the user is not authenticated.
+
+
 
 
 

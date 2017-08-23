@@ -1,0 +1,21 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <input type="text" v-model="message"> 
+
+        <p>This is your message {{ message }}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                message: 'I am a message.'
+            }
+        })      
+    </script>        
+</body>
+</html>
