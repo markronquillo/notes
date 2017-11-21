@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
-
 var app = express();
 
 app.use(bodyParser.json());
@@ -32,7 +31,7 @@ app.get('/webhook', function(req, res) {
 
 function sendMessage(recipientId, message) {
     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
+        url: 'https://graph.facebook.com/v2.11/me/messages',
         qs: {
             access_token: 'EAAFOaEkeNS8BAJqHqrLzeflFcIZAaRtSgz2SdIa8JrTnFARjZAtfmnYRjxz3DOZBbcJEIqSWgxscZALVqVfrDlT91SSdRLUyZCnf4PmxUxpr1tyP4HtpFTRIsKZCaB0rqRgksbZBzf3TXozVkwYJvU6XUmaJ0kGAEZAaX37TggEC4wZDZD',
             method: 'POST', 
