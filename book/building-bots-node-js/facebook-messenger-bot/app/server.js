@@ -22,11 +22,11 @@ app.get('/webhook', function(req, res) {
         }
     }
 
-    if (req.query['hub.verify_token'] === 'whosoffbot_verify_token') {
-        res.status(200).send(req.query['hub.challenge']);
-    } else {
-        res.status(403).send('Invalid verify token');
-    }
+    // if (req.query['hub.verify_token'] === 'whosoffbot_verify_token') {
+    //     res.status(200).send(req.query['hub.challenge']);
+    // } else {
+    //     res.status(403).send('Invalid verify token');
+    // }
 });
 
 function sendMessage(recipientId, message) {
