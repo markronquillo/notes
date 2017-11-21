@@ -34,11 +34,11 @@ function sendMessage(recipientId, message) {
         url: 'https://graph.facebook.com/v2.11/me/messages',
         qs: {
             access_token: 'EAAFOaEkeNS8BAPZA0ScDnGXJAA1sAI7it3rNU6FHMZCjsOOkNrVbzj3LyBAGNDuJoiZBqP1wVPdIvuSVzeb1AHlGBGVMgR8fDGuIAeZBVnjlWZAajTLhdhYd6N1xK5ZA5t22hI2j64Mjg1yTnp8DVcV1LIvZCf5onA91SnATg6aFgZDZD',
-            method: 'POST', 
-            json: {
-                recipient: { id: recipientId },
-                message: message,
-            }
+        }
+        method: 'POST', 
+        json: {
+            recipient: { id: recipientId },
+            message: message,
         }
     }, function(error, response, body) {
         if (error) {
