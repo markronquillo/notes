@@ -4,7 +4,6 @@ var request = require('request');
 
 var app = express();
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -22,6 +21,8 @@ app.get('/webhook', function(req, res) {
         }
     }
 
+    res.sendStatus(200);
+
     // if (req.query['hub.verify_token'] === 'whosoffbot_verify_token') {
     //     res.status(200).send(req.query['hub.challenge']);
     // } else {
@@ -36,9 +37,7 @@ function sendMessage(recipientId, message) {
             access_token: 'EAAFOaEkeNS8BAJqHqrLzeflFcIZAaRtSgz2SdIa8JrTnFARjZAtfmnYRjxz3DOZBbcJEIqSWgxscZALVqVfrDlT91SSdRLUyZCnf4PmxUxpr1tyP4HtpFTRIsKZCaB0rqRgksbZBzf3TXozVkwYJvU6XUmaJ0kGAEZAaX37TggEC4wZDZD',
             method: 'POST', 
             json: {
-                recipient: {
-                    id: recipientId
-                },
+                recipient: { id: recipientId },
                 message: message,
             }
         }
