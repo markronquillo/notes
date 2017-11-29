@@ -11,7 +11,7 @@ Generate a React Native Project
 
 I've used `create-react-native-app`
 
-Stopped: Episode 14
+Stopped: Episode 24
 
 
 
