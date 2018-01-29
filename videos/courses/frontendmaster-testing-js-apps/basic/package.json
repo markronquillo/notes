@@ -1,0 +1,28 @@
+{
+	"name": "basic",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"test": "jest --coverage",
+		"test:watch": "jest --watch"
+	},
+	"jest": {
+		"testEnvironment": "jest-environment-node",
+		"collectCoverageFrom": [
+			"*.js"
+		],
+		"coverageThreshold": {
+			"global": {
+				"statements": 50,
+				"branches": 50,
+				"functions": 50,
+				"lines": 100
+			}
+		}
+	},
+	"devDependencies": {
+		"babel-core": "^6.26.0",
+		"babel-preset-env": "^1.6.1"
+	}
+}
