@@ -44,4 +44,6 @@ app.listen(3000, () => {
 
 Webpack allows you to define externals - modules that should not be bundled.
 
+** I left off trying to get my project started as soon as possible
+
 

@@ -1,0 +1,39 @@
+Arguments: 
+  /usr/local/Cellar/node/9.3.0_1/bin/node /usr/local/bin/yarn add express
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.6/bin:/Users/markronquillo/.composer/vendor/bin:/usr/local/Cellar/php72/7.2.2_13/bin:/usr/local/opt/openssl/bin:/usr/local/opt/icu4c/sbin:/usr/local/opt/icu4c/bin:/usr/local/opt/gettext/bin:/Users/markronquillo/bin:/usr/local/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin
+
+Yarn version: 
+  1.3.2
+
+Node version: 
+  9.3.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "node-web-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
+      at errnoException (dns.js:55:10)
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:97:26)
