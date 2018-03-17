@@ -31,6 +31,26 @@ fs.watch('file or directory', {}, callback)
 
 `setImmediate`: Node will actually run the function you give to nextTick before the one you pass to setImmediate.
 
+### Building Twitter feeds using file events
+
+The goal is to create a server taht a client can connect to and receive updates from Twitter. 
+
+We will first create a process to query Twitter for any messages with the hashtag #nodejs, and write any found messages to a tweets.txt file in 140-byte chunks.
+
+We will then create a network server that broadcasts these messages to a single client. Those broadcasts will be triggered by write events on the tweets.txt file
+
+Whenever a write occurs, 140-bytes chunk are asynchronously read from the last-known client read pointer.
+
+Finally we will create a simple client.html page, which asks for, receives and displays these messages.
+
+This demonstrates:
+
+- Listening to filesystem for changes, and responding to those events
+- Using data streams events for reading and writing files
+- Responding to network events
+- Using timeouts for polling state
+- Using a node server itself as a network event broadcaster
+
 
 
 
