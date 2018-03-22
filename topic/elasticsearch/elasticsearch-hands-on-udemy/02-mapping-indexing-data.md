@@ -132,7 +132,7 @@ curl -XPUT -H 'Content-Type: application/json' localhost:9200/movies/movie/10948
 '
 ```
 
-`curl -XPUT localhost:9200/_bulk?pretty --data-binary @movies.json`
+`curl -XPUT -H 'Content-Type: application/json' localhost:9200/_bulk?pretty --data-binary @movies.json`
 
 ## Updating documents
 
@@ -143,7 +143,7 @@ When you update an existing documents:
 	the old document is marked for deletion
 
 ```
-curl -XPOST localhost:9200/movies/movie/109487/_update -d'{
+curl -XPOST -H 'Content-Type: application/json' localhost:9200/movies/movie/109487/_update -d'{
 	"doc": {
 		"title": "Interstellar"
 	}

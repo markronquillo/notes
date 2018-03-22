@@ -318,6 +318,123 @@ There are two ways of putting mappings inside an index:
 
 http://elasticsearch-py.readthedocs.io/en/master/
 
+##### Elasticsearch Query-DSL
+
+Query-DSL is a JSON interface provided by Elasticsearch to write queries in the JSON format.
+
+```json
+{
+	"query": {},
+	"from": 0,
+	"size": 20,
+	"_source": ["field1", "field2"]
+}
+```
+
+##### Understanding Query-DSL parameters
+
+`query` contains all the queries that need to be passed to Elasticsearch
+
+```json
+{
+	"query": {
+		"query_string": {
+			"default_field": "category",
+			"query": "search"
+		}
+	}
+}
+```
+
+`from` and `size` controls the pagination and teh result size to be returned after querying.
+
+`_source`: (optional) takes field names in an array format, which are to be returend in the query results.
+
+Elastic search queries categories:
+
+- *Basic Queries* include normal keyword searching inside indexes
+- *Compound Queries* combine multiple basic queries together with Boolean clauses.
+
+
+Two major categories of queries 
+
+*Full-Text Search Queries*: usually run over text fields like a tweet text.
+
+*Term-based search queries* this do not go through an analysis process. These queries are used to match exact terms stored inside an inverted index.
+
+##### Full-text search queries
+
+- `match-all`: this matches all documents, it gives generous _score of 1.0 to each document in the index
+
+```json
+{ 
+	"query": {
+		"match_all": {}
+	}
+}
+```
+
+- `match`:the text passed inside a match query goes through the analysis phase and depending on the operator (which defaults to OR), coduments are matched
+
+```json
+{
+	"query": {
+		"match": {
+			"text": "Build Great Web Apps",
+			"operator": 'and'
+		}
+	}
+}
+```
+
+The preceding query will match the documents taht contain the `Build`, `Great`, `Web` and `Apps` terms in the text field. If we had used the OR operator it would have matched the documents containing *any* of these terms.
+
+if we want the exact matches, in the same order
+
+```json
+{
+	"query": {
+		"match": {
+			"text": "\"Build Great Web Apps\""
+		}
+	}
+}
+```
+
+- `multi_match`: similar to match query but provides options to search the same terms in *more than one field at one go*.
+
+```json
+{
+	"query": {
+		"multi_match": {
+			"query": "Build Great Web Apps",
+			"fields": ["text", "retweeted_status.text"]
+		}
+	}
+}
+```
+
+The preceding query will search the words inside the two fields `text and `retweeted_status.text`
+
+- `query_string` this provides a full Lucene syntax to be used in it. It uses a query parser to construct an actual query out of the provided text.
+
+```json
+{
+	"query": {
+		"query_string": {
+			"default_field": "text",
+			"query": "text:analytics^2 +text:data -user.anem:d_bharvi"
+		}
+	}
+}
+```
+
+
+
+
+
+
+
 
 
 
