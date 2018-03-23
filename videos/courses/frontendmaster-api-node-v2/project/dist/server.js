@@ -1,2 +1,1491 @@
-require("source-map-support").install(),function(e){function n(e){var n=require("./"+e+"."+t+".hot-update.js");!function(e,n){if(!w[e]||!m[e])return;for(var r in m[e]=!1,n)Object.prototype.hasOwnProperty.call(n,r)&&(f[r]=n[r]);0==--v&&0===g&&O()}(n.id,n.modules)}var r,o=!0,t="eb0402e26305eecb442e",i={},c=[],d=[];function a(e){var n=x[e];if(!n)return D;var o=function(o){return n.hot.active?(x[o]?x[o].parents.includes(e)||x[o].parents.push(e):(c=[e],r=o),n.children.includes(o)||n.children.push(o)):(console.warn("[HMR] unexpected require("+o+") from disposed module "+e),c=[]),D(o)},t=function(e){return{configurable:!0,enumerable:!0,get:function(){return D[e]},set:function(n){D[e]=n}}};for(var i in D)Object.prototype.hasOwnProperty.call(D,i)&&"e"!==i&&Object.defineProperty(o,i,t(i));return o.e=function(e){return"ready"===s&&u("prepare"),g++,D.e(e).then(n,function(e){throw n(),e});function n(){g--,"prepare"===s&&(y[e]||j(e),0===g&&0===v&&O())}},o}var l=[],s="idle";function u(e){s=e;for(var n=0;n<l.length;n++)l[n].call(null,e)}var p,f,h,v=0,g=0,y={},m={},w={};function b(e){return+e+""===e?+e:e}function _(e){if("idle"!==s)throw new Error("check() is only allowed in idle status");return o=e,u("check"),function(){try{var e=require("./"+t+".hot-update.json")}catch(e){return Promise.resolve()}return Promise.resolve(e)}().then(function(e){if(!e)return u("idle"),null;m={},y={},w=e.c,h=e.h,u("prepare");var n=new Promise(function(e,n){p={resolve:e,reject:n}});f={};return j(0),"prepare"===s&&0===g&&0===v&&O(),n})}function j(e){w[e]?(m[e]=!0,v++,n(e)):y[e]=!0}function O(){u("ready");var e=p;if(p=null,e)if(o)Promise.resolve().then(function(){return H(o)}).then(function(n){e.resolve(n)},function(n){e.reject(n)});else{var n=[];for(var r in f)Object.prototype.hasOwnProperty.call(f,r)&&n.push(b(r));e.resolve(n)}}function H(n){if("ready"!==s)throw new Error("apply() is only allowed in ready status");var r,o,d,a,l;function p(e){for(var n=[e],r={},o=n.slice().map(function(e){return{chain:[e],id:e}});o.length>0;){var t=o.pop(),i=t.id,c=t.chain;if((a=x[i])&&!a.hot._selfAccepted){if(a.hot._selfDeclined)return{type:"self-declined",chain:c,moduleId:i};if(a.hot._main)return{type:"unaccepted",chain:c,moduleId:i};for(var d=0;d<a.parents.length;d++){var l=a.parents[d],s=x[l];if(s){if(s.hot._declinedDependencies[i])return{type:"declined",chain:c.concat([l]),moduleId:i,parentId:l};n.includes(l)||(s.hot._acceptedDependencies[i]?(r[l]||(r[l]=[]),v(r[l],[i])):(delete r[l],n.push(l),o.push({chain:c.concat([l]),id:l})))}}}}return{type:"accepted",moduleId:e,outdatedModules:n,outdatedDependencies:r}}function v(e,n){for(var r=0;r<n.length;r++){var o=n[r];e.includes(o)||e.push(o)}}n=n||{};var g={},y=[],m={},_=function(){console.warn("[HMR] unexpected require("+O.moduleId+") to disposed module")};for(var j in f)if(Object.prototype.hasOwnProperty.call(f,j)){var O;l=b(j);var H=!1,E=!1,k=!1,M="";switch((O=f[j]?p(l):{type:"disposed",moduleId:j}).chain&&(M="\nUpdate propagation: "+O.chain.join(" -> ")),O.type){case"self-declined":n.onDeclined&&n.onDeclined(O),n.ignoreDeclined||(H=new Error("Aborted because of self decline: "+O.moduleId+M));break;case"declined":n.onDeclined&&n.onDeclined(O),n.ignoreDeclined||(H=new Error("Aborted because of declined dependency: "+O.moduleId+" in "+O.parentId+M));break;case"unaccepted":n.onUnaccepted&&n.onUnaccepted(O),n.ignoreUnaccepted||(H=new Error("Aborted because "+l+" is not accepted"+M));break;case"accepted":n.onAccepted&&n.onAccepted(O),E=!0;break;case"disposed":n.onDisposed&&n.onDisposed(O),k=!0;break;default:throw new Error("Unexception type "+O.type)}if(H)return u("abort"),Promise.reject(H);if(E)for(l in m[l]=f[l],v(y,O.outdatedModules),O.outdatedDependencies)Object.prototype.hasOwnProperty.call(O.outdatedDependencies,l)&&(g[l]||(g[l]=[]),v(g[l],O.outdatedDependencies[l]));k&&(v(y,[O.moduleId]),m[l]=_)}var P,I=[];for(o=0;o<y.length;o++)l=y[o],x[l]&&x[l].hot._selfAccepted&&I.push({module:l,errorHandler:x[l].hot._selfAccepted});u("dispose"),Object.keys(w).forEach(function(e){!1===w[e]&&function(e){delete installedChunks[e]}(e)});for(var R,A,U=y.slice();U.length>0;)if(l=U.pop(),a=x[l]){var C={},q=a.hot._disposeHandlers;for(d=0;d<q.length;d++)(r=q[d])(C);for(i[l]=C,a.hot.active=!1,delete x[l],delete g[l],d=0;d<a.children.length;d++){var L=x[a.children[d]];L&&((P=L.parents.indexOf(l))>=0&&L.parents.splice(P,1))}}for(l in g)if(Object.prototype.hasOwnProperty.call(g,l)&&(a=x[l]))for(A=g[l],d=0;d<A.length;d++)R=A[d],(P=a.children.indexOf(R))>=0&&a.children.splice(P,1);for(l in u("apply"),t=h,m)Object.prototype.hasOwnProperty.call(m,l)&&(e[l]=m[l]);var N=null;for(l in g)if(Object.prototype.hasOwnProperty.call(g,l)&&(a=x[l])){A=g[l];var S=[];for(o=0;o<A.length;o++)if(R=A[o],r=a.hot._acceptedDependencies[R]){if(S.includes(r))continue;S.push(r)}for(o=0;o<S.length;o++){r=S[o];try{r(A)}catch(e){n.onErrored&&n.onErrored({type:"accept-errored",moduleId:l,dependencyId:A[o],error:e}),n.ignoreErrored||N||(N=e)}}}for(o=0;o<I.length;o++){var T=I[o];l=T.module,c=[l];try{D(l)}catch(e){if("function"==typeof T.errorHandler)try{T.errorHandler(e)}catch(r){n.onErrored&&n.onErrored({type:"self-accept-error-handler-errored",moduleId:l,error:r,originalError:e}),n.ignoreErrored||N||(N=r),N||(N=e)}else n.onErrored&&n.onErrored({type:"self-accept-errored",moduleId:l,error:e}),n.ignoreErrored||N||(N=e)}}return N?(u("fail"),Promise.reject(N)):(u("idle"),new Promise(function(e){e(y)}))}var x={};function D(n){if(x[n])return x[n].exports;var o=x[n]={i:n,l:!1,exports:{},hot:function(e){var n={_acceptedDependencies:{},_declinedDependencies:{},_selfAccepted:!1,_selfDeclined:!1,_disposeHandlers:[],_main:r!==e,active:!0,accept:function(e,r){if(void 0===e)n._selfAccepted=!0;else if("function"==typeof e)n._selfAccepted=e;else if("object"==typeof e)for(var o=0;o<e.length;o++)n._acceptedDependencies[e[o]]=r||function(){};else n._acceptedDependencies[e]=r||function(){}},decline:function(e){if(void 0===e)n._selfDeclined=!0;else if("object"==typeof e)for(var r=0;r<e.length;r++)n._declinedDependencies[e[r]]=!0;else n._declinedDependencies[e]=!0},dispose:function(e){n._disposeHandlers.push(e)},addDisposeHandler:function(e){n._disposeHandlers.push(e)},removeDisposeHandler:function(e){var r=n._disposeHandlers.indexOf(e);r>=0&&n._disposeHandlers.splice(r,1)},check:_,apply:H,status:function(e){if(!e)return s;l.push(e)},addStatusHandler:function(e){l.push(e)},removeStatusHandler:function(e){var n=l.indexOf(e);n>=0&&l.splice(n,1)},data:i[e]};return r=void 0,n}(n),parents:(d=c,c=[],d),children:[]};return e[n].call(o.exports,o,o.exports,a(n)),o.l=!0,o.exports}D.m=e,D.c=x,D.d=function(e,n,r){D.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},D.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},D.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return D.d(n,"a",n),n},D.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},D.p="",D.w={},D.h=function(){return t},a(0)(D.s=0)}({"./node_modules/webpack/hot/log-apply-result.js":function(e,n,r){e.exports=function(e,n){var o=e.filter(function(e){return n&&n.indexOf(e)<0}),t=r("./node_modules/webpack/hot/log.js");(o.length>0&&(t("warning","[HMR] The following modules couldn't be hot updated: (They would need a full reload!)"),o.forEach(function(e){t("warning","[HMR]  - "+e)})),n&&0!==n.length)?(t("info","[HMR] Updated modules:"),n.forEach(function(e){if("string"==typeof e&&-1!==e.indexOf("!")){var n=e.split("!");t.groupCollapsed("info","[HMR]  - "+n.pop()),t("info","[HMR]  - "+e),t.groupEnd("info")}else t("info","[HMR]  - "+e)}),n.every(function(e){return"number"==typeof e})&&t("info","[HMR] Consider using the NamedModulesPlugin for module names.")):t("info","[HMR] Nothing hot updated.")}},"./node_modules/webpack/hot/log.js":function(e,n){var r="info";function o(){}function t(e){return"info"===r&&"info"===e||["info","warning"].indexOf(r)>=0&&"warning"===e||["info","warning","error"].indexOf(r)>=0&&"error"===e}function i(e){return function(n,r){t(n)&&e(r)}}e.exports=function(e,n){t(e)&&("info"===e?console.log(n):"warning"===e?console.warn(n):"error"===e&&console.error(n))};var c=console.group||o,d=console.groupCollapsed||o,a=console.groupEnd||o;e.exports.group=i(c),e.exports.groupCollapsed=i(d),e.exports.groupEnd=i(a),e.exports.setLogLevel=function(e){r=e}},"./node_modules/webpack/hot/poll.js?1000":function(e,n,r){(function(n){var o=+n.substr(1)||6e5,t=r("./node_modules/webpack/hot/log.js");setInterval(function n(o){"idle"===e.hot.status()&&e.hot.check(!0).then(function(e){e?(r("./node_modules/webpack/hot/log-apply-result.js")(e,e),n(!0)):o&&t("info","[HMR] Update applied.")}).catch(function(n){var r=e.hot.status();["abort","fail"].indexOf(r)>=0?(t("warning","[HMR] Cannot apply update."),t("warning","[HMR] "+n.stack||n.message),t("warning","[HMR] You need to restart the application!")):t("warning","[HMR] Update failed: "+n.stack||n.message)})},o)}).call(this,"?1000")},"./src/index.js":function(e,n){},0:function(e,n,r){r("./node_modules/webpack/hot/poll.js?1000"),e.exports=r("./src/index.js")}});
+require("source-map-support").install();
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	function hotDownloadUpdateChunk(chunkId) { // eslint-disable-line no-unused-vars
+/******/ 		var chunk = require("./" + "" + chunkId + "." + hotCurrentHash + ".hot-update.js");
+/******/ 		hotAddUpdateChunk(chunk.id, chunk.modules);
+/******/ 	}
+/******/ 	
+/******/ 	function hotDownloadManifest() { // eslint-disable-line no-unused-vars
+/******/ 		try {
+/******/ 			var update = require("./" + "" + hotCurrentHash + ".hot-update.json");
+/******/ 		} catch(e) {
+/******/ 			return Promise.resolve();
+/******/ 		}
+/******/ 		return Promise.resolve(update);
+/******/ 	}
+/******/ 	
+/******/ 	function hotDisposeChunk(chunkId) { //eslint-disable-line no-unused-vars
+/******/ 		delete installedChunks[chunkId];
+/******/ 	}
+/******/
+/******/ 	
+/******/ 	
+/******/ 	var hotApplyOnUpdate = true;
+/******/ 	var hotCurrentHash = "62262dad7312ac023335"; // eslint-disable-line no-unused-vars
+/******/ 	var hotRequestTimeout = 10000;
+/******/ 	var hotCurrentModuleData = {};
+/******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentParentsTemp = []; // eslint-disable-line no-unused-vars
+/******/ 	
+/******/ 	function hotCreateRequire(moduleId) { // eslint-disable-line no-unused-vars
+/******/ 		var me = installedModules[moduleId];
+/******/ 		if(!me) return __webpack_require__;
+/******/ 		var fn = function(request) {
+/******/ 			if(me.hot.active) {
+/******/ 				if(installedModules[request]) {
+/******/ 					if(installedModules[request].parents.indexOf(moduleId) < 0)
+/******/ 						installedModules[request].parents.push(moduleId);
+/******/ 				} else {
+/******/ 					hotCurrentParents = [moduleId];
+/******/ 					hotCurrentChildModule = request;
+/******/ 				}
+/******/ 				if(me.children.indexOf(request) < 0)
+/******/ 					me.children.push(request);
+/******/ 			} else {
+/******/ 				console.warn("[HMR] unexpected require(" + request + ") from disposed module " + moduleId);
+/******/ 				hotCurrentParents = [];
+/******/ 			}
+/******/ 			return __webpack_require__(request);
+/******/ 		};
+/******/ 		var ObjectFactory = function ObjectFactory(name) {
+/******/ 			return {
+/******/ 				configurable: true,
+/******/ 				enumerable: true,
+/******/ 				get: function() {
+/******/ 					return __webpack_require__[name];
+/******/ 				},
+/******/ 				set: function(value) {
+/******/ 					__webpack_require__[name] = value;
+/******/ 				}
+/******/ 			};
+/******/ 		};
+/******/ 		for(var name in __webpack_require__) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(__webpack_require__, name) && name !== "e") {
+/******/ 				Object.defineProperty(fn, name, ObjectFactory(name));
+/******/ 			}
+/******/ 		}
+/******/ 		fn.e = function(chunkId) {
+/******/ 			if(hotStatus === "ready")
+/******/ 				hotSetStatus("prepare");
+/******/ 			hotChunksLoading++;
+/******/ 			return __webpack_require__.e(chunkId).then(finishChunkLoading, function(err) {
+/******/ 				finishChunkLoading();
+/******/ 				throw err;
+/******/ 			});
+/******/ 	
+/******/ 			function finishChunkLoading() {
+/******/ 				hotChunksLoading--;
+/******/ 				if(hotStatus === "prepare") {
+/******/ 					if(!hotWaitingFilesMap[chunkId]) {
+/******/ 						hotEnsureUpdateChunk(chunkId);
+/******/ 					}
+/******/ 					if(hotChunksLoading === 0 && hotWaitingFiles === 0) {
+/******/ 						hotUpdateDownloaded();
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 		return fn;
+/******/ 	}
+/******/ 	
+/******/ 	function hotCreateModule(moduleId) { // eslint-disable-line no-unused-vars
+/******/ 		var hot = {
+/******/ 			// private stuff
+/******/ 			_acceptedDependencies: {},
+/******/ 			_declinedDependencies: {},
+/******/ 			_selfAccepted: false,
+/******/ 			_selfDeclined: false,
+/******/ 			_disposeHandlers: [],
+/******/ 			_main: hotCurrentChildModule !== moduleId,
+/******/ 	
+/******/ 			// Module API
+/******/ 			active: true,
+/******/ 			accept: function(dep, callback) {
+/******/ 				if(typeof dep === "undefined")
+/******/ 					hot._selfAccepted = true;
+/******/ 				else if(typeof dep === "function")
+/******/ 					hot._selfAccepted = dep;
+/******/ 				else if(typeof dep === "object")
+/******/ 					for(var i = 0; i < dep.length; i++)
+/******/ 						hot._acceptedDependencies[dep[i]] = callback || function() {};
+/******/ 				else
+/******/ 					hot._acceptedDependencies[dep] = callback || function() {};
+/******/ 			},
+/******/ 			decline: function(dep) {
+/******/ 				if(typeof dep === "undefined")
+/******/ 					hot._selfDeclined = true;
+/******/ 				else if(typeof dep === "object")
+/******/ 					for(var i = 0; i < dep.length; i++)
+/******/ 						hot._declinedDependencies[dep[i]] = true;
+/******/ 				else
+/******/ 					hot._declinedDependencies[dep] = true;
+/******/ 			},
+/******/ 			dispose: function(callback) {
+/******/ 				hot._disposeHandlers.push(callback);
+/******/ 			},
+/******/ 			addDisposeHandler: function(callback) {
+/******/ 				hot._disposeHandlers.push(callback);
+/******/ 			},
+/******/ 			removeDisposeHandler: function(callback) {
+/******/ 				var idx = hot._disposeHandlers.indexOf(callback);
+/******/ 				if(idx >= 0) hot._disposeHandlers.splice(idx, 1);
+/******/ 			},
+/******/ 	
+/******/ 			// Management API
+/******/ 			check: hotCheck,
+/******/ 			apply: hotApply,
+/******/ 			status: function(l) {
+/******/ 				if(!l) return hotStatus;
+/******/ 				hotStatusHandlers.push(l);
+/******/ 			},
+/******/ 			addStatusHandler: function(l) {
+/******/ 				hotStatusHandlers.push(l);
+/******/ 			},
+/******/ 			removeStatusHandler: function(l) {
+/******/ 				var idx = hotStatusHandlers.indexOf(l);
+/******/ 				if(idx >= 0) hotStatusHandlers.splice(idx, 1);
+/******/ 			},
+/******/ 	
+/******/ 			//inherit from previous dispose call
+/******/ 			data: hotCurrentModuleData[moduleId]
+/******/ 		};
+/******/ 		hotCurrentChildModule = undefined;
+/******/ 		return hot;
+/******/ 	}
+/******/ 	
+/******/ 	var hotStatusHandlers = [];
+/******/ 	var hotStatus = "idle";
+/******/ 	
+/******/ 	function hotSetStatus(newStatus) {
+/******/ 		hotStatus = newStatus;
+/******/ 		for(var i = 0; i < hotStatusHandlers.length; i++)
+/******/ 			hotStatusHandlers[i].call(null, newStatus);
+/******/ 	}
+/******/ 	
+/******/ 	// while downloading
+/******/ 	var hotWaitingFiles = 0;
+/******/ 	var hotChunksLoading = 0;
+/******/ 	var hotWaitingFilesMap = {};
+/******/ 	var hotRequestedFilesMap = {};
+/******/ 	var hotAvailableFilesMap = {};
+/******/ 	var hotDeferred;
+/******/ 	
+/******/ 	// The update info
+/******/ 	var hotUpdate, hotUpdateNewHash;
+/******/ 	
+/******/ 	function toModuleId(id) {
+/******/ 		var isNumber = (+id) + "" === id;
+/******/ 		return isNumber ? +id : id;
+/******/ 	}
+/******/ 	
+/******/ 	function hotCheck(apply) {
+/******/ 		if(hotStatus !== "idle") throw new Error("check() is only allowed in idle status");
+/******/ 		hotApplyOnUpdate = apply;
+/******/ 		hotSetStatus("check");
+/******/ 		return hotDownloadManifest(hotRequestTimeout).then(function(update) {
+/******/ 			if(!update) {
+/******/ 				hotSetStatus("idle");
+/******/ 				return null;
+/******/ 			}
+/******/ 			hotRequestedFilesMap = {};
+/******/ 			hotWaitingFilesMap = {};
+/******/ 			hotAvailableFilesMap = update.c;
+/******/ 			hotUpdateNewHash = update.h;
+/******/ 	
+/******/ 			hotSetStatus("prepare");
+/******/ 			var promise = new Promise(function(resolve, reject) {
+/******/ 				hotDeferred = {
+/******/ 					resolve: resolve,
+/******/ 					reject: reject
+/******/ 				};
+/******/ 			});
+/******/ 			hotUpdate = {};
+/******/ 			var chunkId = 0;
+/******/ 			{ // eslint-disable-line no-lone-blocks
+/******/ 				/*globals chunkId */
+/******/ 				hotEnsureUpdateChunk(chunkId);
+/******/ 			}
+/******/ 			if(hotStatus === "prepare" && hotChunksLoading === 0 && hotWaitingFiles === 0) {
+/******/ 				hotUpdateDownloaded();
+/******/ 			}
+/******/ 			return promise;
+/******/ 		});
+/******/ 	}
+/******/ 	
+/******/ 	function hotAddUpdateChunk(chunkId, moreModules) { // eslint-disable-line no-unused-vars
+/******/ 		if(!hotAvailableFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
+/******/ 			return;
+/******/ 		hotRequestedFilesMap[chunkId] = false;
+/******/ 		for(var moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				hotUpdate[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(--hotWaitingFiles === 0 && hotChunksLoading === 0) {
+/******/ 			hotUpdateDownloaded();
+/******/ 		}
+/******/ 	}
+/******/ 	
+/******/ 	function hotEnsureUpdateChunk(chunkId) {
+/******/ 		if(!hotAvailableFilesMap[chunkId]) {
+/******/ 			hotWaitingFilesMap[chunkId] = true;
+/******/ 		} else {
+/******/ 			hotRequestedFilesMap[chunkId] = true;
+/******/ 			hotWaitingFiles++;
+/******/ 			hotDownloadUpdateChunk(chunkId);
+/******/ 		}
+/******/ 	}
+/******/ 	
+/******/ 	function hotUpdateDownloaded() {
+/******/ 		hotSetStatus("ready");
+/******/ 		var deferred = hotDeferred;
+/******/ 		hotDeferred = null;
+/******/ 		if(!deferred) return;
+/******/ 		if(hotApplyOnUpdate) {
+/******/ 			// Wrap deferred object in Promise to mark it as a well-handled Promise to
+/******/ 			// avoid triggering uncaught exception warning in Chrome.
+/******/ 			// See https://bugs.chromium.org/p/chromium/issues/detail?id=465666
+/******/ 			Promise.resolve().then(function() {
+/******/ 				return hotApply(hotApplyOnUpdate);
+/******/ 			}).then(
+/******/ 				function(result) {
+/******/ 					deferred.resolve(result);
+/******/ 				},
+/******/ 				function(err) {
+/******/ 					deferred.reject(err);
+/******/ 				}
+/******/ 			);
+/******/ 		} else {
+/******/ 			var outdatedModules = [];
+/******/ 			for(var id in hotUpdate) {
+/******/ 				if(Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
+/******/ 					outdatedModules.push(toModuleId(id));
+/******/ 				}
+/******/ 			}
+/******/ 			deferred.resolve(outdatedModules);
+/******/ 		}
+/******/ 	}
+/******/ 	
+/******/ 	function hotApply(options) {
+/******/ 		if(hotStatus !== "ready") throw new Error("apply() is only allowed in ready status");
+/******/ 		options = options || {};
+/******/ 	
+/******/ 		var cb;
+/******/ 		var i;
+/******/ 		var j;
+/******/ 		var module;
+/******/ 		var moduleId;
+/******/ 	
+/******/ 		function getAffectedStuff(updateModuleId) {
+/******/ 			var outdatedModules = [updateModuleId];
+/******/ 			var outdatedDependencies = {};
+/******/ 	
+/******/ 			var queue = outdatedModules.slice().map(function(id) {
+/******/ 				return {
+/******/ 					chain: [id],
+/******/ 					id: id
+/******/ 				};
+/******/ 			});
+/******/ 			while(queue.length > 0) {
+/******/ 				var queueItem = queue.pop();
+/******/ 				var moduleId = queueItem.id;
+/******/ 				var chain = queueItem.chain;
+/******/ 				module = installedModules[moduleId];
+/******/ 				if(!module || module.hot._selfAccepted)
+/******/ 					continue;
+/******/ 				if(module.hot._selfDeclined) {
+/******/ 					return {
+/******/ 						type: "self-declined",
+/******/ 						chain: chain,
+/******/ 						moduleId: moduleId
+/******/ 					};
+/******/ 				}
+/******/ 				if(module.hot._main) {
+/******/ 					return {
+/******/ 						type: "unaccepted",
+/******/ 						chain: chain,
+/******/ 						moduleId: moduleId
+/******/ 					};
+/******/ 				}
+/******/ 				for(var i = 0; i < module.parents.length; i++) {
+/******/ 					var parentId = module.parents[i];
+/******/ 					var parent = installedModules[parentId];
+/******/ 					if(!parent) continue;
+/******/ 					if(parent.hot._declinedDependencies[moduleId]) {
+/******/ 						return {
+/******/ 							type: "declined",
+/******/ 							chain: chain.concat([parentId]),
+/******/ 							moduleId: moduleId,
+/******/ 							parentId: parentId
+/******/ 						};
+/******/ 					}
+/******/ 					if(outdatedModules.indexOf(parentId) >= 0) continue;
+/******/ 					if(parent.hot._acceptedDependencies[moduleId]) {
+/******/ 						if(!outdatedDependencies[parentId])
+/******/ 							outdatedDependencies[parentId] = [];
+/******/ 						addAllToSet(outdatedDependencies[parentId], [moduleId]);
+/******/ 						continue;
+/******/ 					}
+/******/ 					delete outdatedDependencies[parentId];
+/******/ 					outdatedModules.push(parentId);
+/******/ 					queue.push({
+/******/ 						chain: chain.concat([parentId]),
+/******/ 						id: parentId
+/******/ 					});
+/******/ 				}
+/******/ 			}
+/******/ 	
+/******/ 			return {
+/******/ 				type: "accepted",
+/******/ 				moduleId: updateModuleId,
+/******/ 				outdatedModules: outdatedModules,
+/******/ 				outdatedDependencies: outdatedDependencies
+/******/ 			};
+/******/ 		}
+/******/ 	
+/******/ 		function addAllToSet(a, b) {
+/******/ 			for(var i = 0; i < b.length; i++) {
+/******/ 				var item = b[i];
+/******/ 				if(a.indexOf(item) < 0)
+/******/ 					a.push(item);
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// at begin all updates modules are outdated
+/******/ 		// the "outdated" status can propagate to parents if they don't accept the children
+/******/ 		var outdatedDependencies = {};
+/******/ 		var outdatedModules = [];
+/******/ 		var appliedUpdate = {};
+/******/ 	
+/******/ 		var warnUnexpectedRequire = function warnUnexpectedRequire() {
+/******/ 			console.warn("[HMR] unexpected require(" + result.moduleId + ") to disposed module");
+/******/ 		};
+/******/ 	
+/******/ 		for(var id in hotUpdate) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
+/******/ 				moduleId = toModuleId(id);
+/******/ 				var result;
+/******/ 				if(hotUpdate[id]) {
+/******/ 					result = getAffectedStuff(moduleId);
+/******/ 				} else {
+/******/ 					result = {
+/******/ 						type: "disposed",
+/******/ 						moduleId: id
+/******/ 					};
+/******/ 				}
+/******/ 				var abortError = false;
+/******/ 				var doApply = false;
+/******/ 				var doDispose = false;
+/******/ 				var chainInfo = "";
+/******/ 				if(result.chain) {
+/******/ 					chainInfo = "\nUpdate propagation: " + result.chain.join(" -> ");
+/******/ 				}
+/******/ 				switch(result.type) {
+/******/ 					case "self-declined":
+/******/ 						if(options.onDeclined)
+/******/ 							options.onDeclined(result);
+/******/ 						if(!options.ignoreDeclined)
+/******/ 							abortError = new Error("Aborted because of self decline: " + result.moduleId + chainInfo);
+/******/ 						break;
+/******/ 					case "declined":
+/******/ 						if(options.onDeclined)
+/******/ 							options.onDeclined(result);
+/******/ 						if(!options.ignoreDeclined)
+/******/ 							abortError = new Error("Aborted because of declined dependency: " + result.moduleId + " in " + result.parentId + chainInfo);
+/******/ 						break;
+/******/ 					case "unaccepted":
+/******/ 						if(options.onUnaccepted)
+/******/ 							options.onUnaccepted(result);
+/******/ 						if(!options.ignoreUnaccepted)
+/******/ 							abortError = new Error("Aborted because " + moduleId + " is not accepted" + chainInfo);
+/******/ 						break;
+/******/ 					case "accepted":
+/******/ 						if(options.onAccepted)
+/******/ 							options.onAccepted(result);
+/******/ 						doApply = true;
+/******/ 						break;
+/******/ 					case "disposed":
+/******/ 						if(options.onDisposed)
+/******/ 							options.onDisposed(result);
+/******/ 						doDispose = true;
+/******/ 						break;
+/******/ 					default:
+/******/ 						throw new Error("Unexception type " + result.type);
+/******/ 				}
+/******/ 				if(abortError) {
+/******/ 					hotSetStatus("abort");
+/******/ 					return Promise.reject(abortError);
+/******/ 				}
+/******/ 				if(doApply) {
+/******/ 					appliedUpdate[moduleId] = hotUpdate[moduleId];
+/******/ 					addAllToSet(outdatedModules, result.outdatedModules);
+/******/ 					for(moduleId in result.outdatedDependencies) {
+/******/ 						if(Object.prototype.hasOwnProperty.call(result.outdatedDependencies, moduleId)) {
+/******/ 							if(!outdatedDependencies[moduleId])
+/******/ 								outdatedDependencies[moduleId] = [];
+/******/ 							addAllToSet(outdatedDependencies[moduleId], result.outdatedDependencies[moduleId]);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 				if(doDispose) {
+/******/ 					addAllToSet(outdatedModules, [result.moduleId]);
+/******/ 					appliedUpdate[moduleId] = warnUnexpectedRequire;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// Store self accepted outdated modules to require them later by the module system
+/******/ 		var outdatedSelfAcceptedModules = [];
+/******/ 		for(i = 0; i < outdatedModules.length; i++) {
+/******/ 			moduleId = outdatedModules[i];
+/******/ 			if(installedModules[moduleId] && installedModules[moduleId].hot._selfAccepted)
+/******/ 				outdatedSelfAcceptedModules.push({
+/******/ 					module: moduleId,
+/******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
+/******/ 				});
+/******/ 		}
+/******/ 	
+/******/ 		// Now in "dispose" phase
+/******/ 		hotSetStatus("dispose");
+/******/ 		Object.keys(hotAvailableFilesMap).forEach(function(chunkId) {
+/******/ 			if(hotAvailableFilesMap[chunkId] === false) {
+/******/ 				hotDisposeChunk(chunkId);
+/******/ 			}
+/******/ 		});
+/******/ 	
+/******/ 		var idx;
+/******/ 		var queue = outdatedModules.slice();
+/******/ 		while(queue.length > 0) {
+/******/ 			moduleId = queue.pop();
+/******/ 			module = installedModules[moduleId];
+/******/ 			if(!module) continue;
+/******/ 	
+/******/ 			var data = {};
+/******/ 	
+/******/ 			// Call dispose handlers
+/******/ 			var disposeHandlers = module.hot._disposeHandlers;
+/******/ 			for(j = 0; j < disposeHandlers.length; j++) {
+/******/ 				cb = disposeHandlers[j];
+/******/ 				cb(data);
+/******/ 			}
+/******/ 			hotCurrentModuleData[moduleId] = data;
+/******/ 	
+/******/ 			// disable module (this disables requires from this module)
+/******/ 			module.hot.active = false;
+/******/ 	
+/******/ 			// remove module from cache
+/******/ 			delete installedModules[moduleId];
+/******/ 	
+/******/ 			// when disposing there is no need to call dispose handler
+/******/ 			delete outdatedDependencies[moduleId];
+/******/ 	
+/******/ 			// remove "parents" references from all children
+/******/ 			for(j = 0; j < module.children.length; j++) {
+/******/ 				var child = installedModules[module.children[j]];
+/******/ 				if(!child) continue;
+/******/ 				idx = child.parents.indexOf(moduleId);
+/******/ 				if(idx >= 0) {
+/******/ 					child.parents.splice(idx, 1);
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// remove outdated dependency from module children
+/******/ 		var dependency;
+/******/ 		var moduleOutdatedDependencies;
+/******/ 		for(moduleId in outdatedDependencies) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)) {
+/******/ 				module = installedModules[moduleId];
+/******/ 				if(module) {
+/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
+/******/ 					for(j = 0; j < moduleOutdatedDependencies.length; j++) {
+/******/ 						dependency = moduleOutdatedDependencies[j];
+/******/ 						idx = module.children.indexOf(dependency);
+/******/ 						if(idx >= 0) module.children.splice(idx, 1);
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// Not in "apply" phase
+/******/ 		hotSetStatus("apply");
+/******/ 	
+/******/ 		hotCurrentHash = hotUpdateNewHash;
+/******/ 	
+/******/ 		// insert new code
+/******/ 		for(moduleId in appliedUpdate) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
+/******/ 				modules[moduleId] = appliedUpdate[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// call accept handlers
+/******/ 		var error = null;
+/******/ 		for(moduleId in outdatedDependencies) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)) {
+/******/ 				module = installedModules[moduleId];
+/******/ 				if(module) {
+/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
+/******/ 					var callbacks = [];
+/******/ 					for(i = 0; i < moduleOutdatedDependencies.length; i++) {
+/******/ 						dependency = moduleOutdatedDependencies[i];
+/******/ 						cb = module.hot._acceptedDependencies[dependency];
+/******/ 						if(cb) {
+/******/ 							if(callbacks.indexOf(cb) >= 0) continue;
+/******/ 							callbacks.push(cb);
+/******/ 						}
+/******/ 					}
+/******/ 					for(i = 0; i < callbacks.length; i++) {
+/******/ 						cb = callbacks[i];
+/******/ 						try {
+/******/ 							cb(moduleOutdatedDependencies);
+/******/ 						} catch(err) {
+/******/ 							if(options.onErrored) {
+/******/ 								options.onErrored({
+/******/ 									type: "accept-errored",
+/******/ 									moduleId: moduleId,
+/******/ 									dependencyId: moduleOutdatedDependencies[i],
+/******/ 									error: err
+/******/ 								});
+/******/ 							}
+/******/ 							if(!options.ignoreErrored) {
+/******/ 								if(!error)
+/******/ 									error = err;
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// Load self accepted modules
+/******/ 		for(i = 0; i < outdatedSelfAcceptedModules.length; i++) {
+/******/ 			var item = outdatedSelfAcceptedModules[i];
+/******/ 			moduleId = item.module;
+/******/ 			hotCurrentParents = [moduleId];
+/******/ 			try {
+/******/ 				__webpack_require__(moduleId);
+/******/ 			} catch(err) {
+/******/ 				if(typeof item.errorHandler === "function") {
+/******/ 					try {
+/******/ 						item.errorHandler(err);
+/******/ 					} catch(err2) {
+/******/ 						if(options.onErrored) {
+/******/ 							options.onErrored({
+/******/ 								type: "self-accept-error-handler-errored",
+/******/ 								moduleId: moduleId,
+/******/ 								error: err2,
+/******/ 								orginalError: err, // TODO remove in webpack 4
+/******/ 								originalError: err
+/******/ 							});
+/******/ 						}
+/******/ 						if(!options.ignoreErrored) {
+/******/ 							if(!error)
+/******/ 								error = err2;
+/******/ 						}
+/******/ 						if(!error)
+/******/ 							error = err;
+/******/ 					}
+/******/ 				} else {
+/******/ 					if(options.onErrored) {
+/******/ 						options.onErrored({
+/******/ 							type: "self-accept-errored",
+/******/ 							moduleId: moduleId,
+/******/ 							error: err
+/******/ 						});
+/******/ 					}
+/******/ 					if(!options.ignoreErrored) {
+/******/ 						if(!error)
+/******/ 							error = err;
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// handle errors in accept handlers and self accepted module load
+/******/ 		if(error) {
+/******/ 			hotSetStatus("fail");
+/******/ 			return Promise.reject(error);
+/******/ 		}
+/******/ 	
+/******/ 		hotSetStatus("idle");
+/******/ 		return new Promise(function(resolve) {
+/******/ 			resolve(outdatedModules);
+/******/ 		});
+/******/ 	}
+/******/
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {},
+/******/ 			hot: hotCreateModule(moduleId),
+/******/ 			parents: (hotCurrentParentsTemp = hotCurrentParents, hotCurrentParents = [], hotCurrentParentsTemp),
+/******/ 			children: []
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, hotCreateRequire(moduleId));
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// __webpack_hash__
+/******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return hotCreateRequire(0)(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/webpack/hot/log-apply-result.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+module.exports = function(updatedModules, renewedModules) {
+	var unacceptedModules = updatedModules.filter(function(moduleId) {
+		return renewedModules && renewedModules.indexOf(moduleId) < 0;
+	});
+	var log = __webpack_require__("./node_modules/webpack/hot/log.js");
+
+	if(unacceptedModules.length > 0) {
+		log("warning", "[HMR] The following modules couldn't be hot updated: (They would need a full reload!)");
+		unacceptedModules.forEach(function(moduleId) {
+			log("warning", "[HMR]  - " + moduleId);
+		});
+	}
+
+	if(!renewedModules || renewedModules.length === 0) {
+		log("info", "[HMR] Nothing hot updated.");
+	} else {
+		log("info", "[HMR] Updated modules:");
+		renewedModules.forEach(function(moduleId) {
+			if(typeof moduleId === "string" && moduleId.indexOf("!") !== -1) {
+				var parts = moduleId.split("!");
+				log.groupCollapsed("info", "[HMR]  - " + parts.pop());
+				log("info", "[HMR]  - " + moduleId);
+				log.groupEnd("info");
+			} else {
+				log("info", "[HMR]  - " + moduleId);
+			}
+		});
+		var numberIds = renewedModules.every(function(moduleId) {
+			return typeof moduleId === "number";
+		});
+		if(numberIds)
+			log("info", "[HMR] Consider using the NamedModulesPlugin for module names.");
+	}
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/hot/log.js":
+/***/ (function(module, exports) {
+
+var logLevel = "info";
+
+function dummy() {}
+
+function shouldLog(level) {
+	var shouldLog = (logLevel === "info" && level === "info") ||
+		(["info", "warning"].indexOf(logLevel) >= 0 && level === "warning") ||
+		(["info", "warning", "error"].indexOf(logLevel) >= 0 && level === "error");
+	return shouldLog;
+}
+
+function logGroup(logFn) {
+	return function(level, msg) {
+		if(shouldLog(level)) {
+			logFn(msg);
+		}
+	};
+}
+
+module.exports = function(level, msg) {
+	if(shouldLog(level)) {
+		if(level === "info") {
+			console.log(msg);
+		} else if(level === "warning") {
+			console.warn(msg);
+		} else if(level === "error") {
+			console.error(msg);
+		}
+	}
+};
+
+var group = console.group || dummy;
+var groupCollapsed = console.groupCollapsed || dummy;
+var groupEnd = console.groupEnd || dummy;
+
+module.exports.group = logGroup(group);
+
+module.exports.groupCollapsed = logGroup(groupCollapsed);
+
+module.exports.groupEnd = logGroup(groupEnd);
+
+module.exports.setLogLevel = function(level) {
+	logLevel = level;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/hot/poll.js?1000":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(__resourceQuery) {/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+/*globals __resourceQuery */
+if(true) {
+	var hotPollInterval = +(__resourceQuery.substr(1)) || (10 * 60 * 1000);
+	var log = __webpack_require__("./node_modules/webpack/hot/log.js");
+
+	var checkForUpdate = function checkForUpdate(fromUpdate) {
+		if(module.hot.status() === "idle") {
+			module.hot.check(true).then(function(updatedModules) {
+				if(!updatedModules) {
+					if(fromUpdate) log("info", "[HMR] Update applied.");
+					return;
+				}
+				__webpack_require__("./node_modules/webpack/hot/log-apply-result.js")(updatedModules, updatedModules);
+				checkForUpdate(true);
+			}).catch(function(err) {
+				var status = module.hot.status();
+				if(["abort", "fail"].indexOf(status) >= 0) {
+					log("warning", "[HMR] Cannot apply update.");
+					log("warning", "[HMR] " + err.stack || err.message);
+					log("warning", "[HMR] You need to restart the application!");
+				} else {
+					log("warning", "[HMR] Update failed: " + err.stack || err.message);
+				}
+			});
+		}
+	};
+	setInterval(checkForUpdate, hotPollInterval);
+} else {
+	throw new Error("[HMR] Hot Module Replacement is disabled.");
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, "?1000"))
+
+/***/ }),
+
+/***/ "./src/api/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__restRouter__ = __webpack_require__("./src/api/restRouter.js");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__restRouter__["a"]; });
+
+
+/***/ }),
+
+/***/ "./src/api/modules/auth.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return signin; });
+/* unused harmony export decodeToken */
+/* unused harmony export getFreshUser */
+/* unused harmony export verifyUser */
+/* unused harmony export signToken */
+/* unused harmony export protect */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__resources_user_user_model__ = __webpack_require__("./src/api/resources/user/user.model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jsonwebtoken__ = __webpack_require__("jsonwebtoken");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jsonwebtoken__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__("./src/config/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_express_jwt__ = __webpack_require__("express-jwt");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_express_jwt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_express_jwt__);
+
+
+
+
+
+var checkToken = __WEBPACK_IMPORTED_MODULE_3_express_jwt___default()({ secret: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* default */].secrets.JWT_SECRET });
+
+var signin = function signin(req, res, next) {
+  var token = signToken(req.user.id);
+  res.json({ token: token });
+};
+
+var decodeToken = function decodeToken() {
+  return function (req, res, next) {
+    if (__WEBPACK_IMPORTED_MODULE_2__config__["a" /* default */].disableAuth) {
+      return next();
+    }
+
+    // make it optional to place token on query string
+    // if it is, place it on the headers where it should be
+    // so checkToken can see it. 
+    if (req.query && req.query.hasOwnProperty('access_token')) {
+      req.headers.authorization = 'Bearer ' + req.query.access_token;
+    }
+
+    // this will call next if token is valid
+    // and send error if its not. It will attached
+    // the decoded token to req.user
+    checkToken(req, res, next);
+  };
+};
+
+var getFreshUser = function getFreshUser() {
+  return function (req, res, next) {
+    return __WEBPACK_IMPORTED_MODULE_0__resources_user_user_model__["a" /* User */].findById(req.user.id).then(function (user) {
+      if (!user) {
+        // if no user is found it was not
+        // it was a valid JWT but didnt' decode
+        // to a real user in our DB. Either the user was deleted
+        // since the client got the JWT, or it was a JWT form some other source
+        res.status(401).send('Unauthorized');
+      } else {
+
+        req.user = user;
+        next();
+      }
+    }).catch(function (error) {
+      return next(error);
+    });
+  };
+};
+
+var verifyUser = function verifyUser() {
+  return function (req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+
+    if (!username || !password) {
+      res.status(400).send('You need a username and password');
+    }
+
+    __WEBPACK_IMPORTED_MODULE_0__resources_user_user_model__["a" /* User */].findOne({ username: username }).then(function (user) {
+      if (!user) {
+        res.status(401).send('No user with the given username');
+      } else {
+        if (!user.authenticate(password)) {
+          res.status(401).send('Wrong password');
+        } else {
+          req.user = user;
+          next();
+        }
+      }
+    }).catch(function (error) {
+      return next(err);
+    });
+  };
+};
+
+var signToken = function signToken(id) {
+  return __WEBPACK_IMPORTED_MODULE_1_jsonwebtoken___default.a.sign({ id: id }, __WEBPACK_IMPORTED_MODULE_2__config__["a" /* default */].secrets.JWT_SECRET, { expiresIn: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* default */].expireTime });
+};
+
+var protect = [decodeToken(), getFreshUser()];
+
+/***/ }),
+
+/***/ "./src/api/modules/errorHandler.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiErrorHandler; });
+/**
+ * An error handler is a function that has error for its 
+ * first argument
+ *
+ */
+var apiErrorHandler = function apiErrorHandler(error, req, res, next) {
+  console.error(error.stack);
+  res.status(500).send(error.message || error.toString());
+};
+
+/***/ }),
+
+/***/ "./src/api/modules/query.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export controllers */
+/* unused harmony export createOne */
+/* unused harmony export updateOne */
+/* unused harmony export deleteOne */
+/* unused harmony export getOne */
+/* unused harmony export getAll */
+/* unused harmony export findByParam */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return generateControllers; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__("babel-runtime/helpers/extends");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("babel-runtime/helpers/asyncToGenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_core_js_promise__ = __webpack_require__("babel-runtime/core-js/promise");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_core_js_promise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_merge__ = __webpack_require__("lodash.merge");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_merge___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash_merge__);
+
+
+
+
+
+var _this = this;
+
+
+
+var controllers = {
+  createOne: function createOne(model, body) {
+    return model.create(body);
+  },
+  updateOne: function updateOne(docToUpdate, update) {
+    __WEBPACK_IMPORTED_MODULE_4_lodash_merge___default()(docToUpdate, update);
+    return docToUpdate.save();
+  },
+  deleteOne: function deleteOne(docToDelete) {
+    return docToDelete.remove();
+  },
+  getOne: function getOne(docToGet) {
+    return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_core_js_promise___default.a.resolve(docToGet);
+  },
+  getAll: function getAll(model) {
+    return model.find({});
+  },
+  findByParam: function findByParam(model, id) {
+    return model.findById(id);
+  }
+};
+
+var createOne = function createOne(model) {
+  return function (req, res, next) {
+    return controllers.createOne(model, req.body).then(function (doc) {
+      return res.status(201).json(doc);
+    }).catch(function (error) {
+      return next(error);
+    });
+  };
+};
+
+var updateOne = function updateOne(model) {
+  return function () {
+    var _ref = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee(req, res, next) {
+      var docToUpdate, update;
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              docToUpdate = req.docFromId;
+              update = req.body;
+              return _context.abrupt('return', controllers.updateOne(docToUpdate, update).then(function (doc) {
+                return res.status(201).json(doc);
+              }).catch(function (error) {
+                return next(error);
+              }));
+
+            case 3:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this);
+    }));
+
+    return function (_x, _x2, _x3) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+};
+
+var deleteOne = function deleteOne(model) {
+  return function (req, res, next) {
+    return controllers.deleteOne(req.docFromId).then(function (doc) {
+      return res.status(201).json(doc);
+    }).catch(function (error) {
+      return next(error);
+    });
+  };
+};
+
+var getOne = function getOne(model) {
+  return function (req, res, next) {
+    return controllers.getOne(req.docToUpdate).then(function (doc) {
+      return res.status(200).json(doc);
+    }).catch(function (error) {
+      return next(error);
+    });
+  };
+};
+
+var getAll = function getAll(model) {
+  return function (req, res, next) {
+    return controllers.getAll(model).then(function (docs) {
+      return res.json(docs);
+    }).catch(function (error) {
+      return next(error);
+    });
+  };
+};
+
+var findByParam = function findByParam(model) {
+  return function (req, res, next, id) {
+    return controllers.findByParam(model, id).then(function (doc) {
+      if (!doc) {
+        next(new Error('Not Found Error'));
+      } else {
+        req.docFromId;
+        next();
+      }
+    }).catch(function (error) {
+      next(error);
+    });
+  };
+};
+
+var generateControllers = function generateControllers(model) {
+  var overrides = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  var defaults = {
+    findByParam: findByParam(model),
+    getAll: getAll(model),
+    getOne: getOne(model),
+    deleteOne: deleteOne(model),
+    updateOne: updateOne(model),
+    createOne: createOne(model)
+  };
+
+  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, defaults, overrides);
+};
+
+/***/ }),
+
+/***/ "./src/api/resources/user/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_restRouter__ = __webpack_require__("./src/api/resources/user/user.restRouter.js");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__user_restRouter__["a"]; });
+
+
+/***/ }),
+
+/***/ "./src/api/resources/user/user.controller.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_query__ = __webpack_require__("./src/api/modules/query.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_model__ = __webpack_require__("./src/api/resources/user/user.model.js");
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0__modules_query__["a" /* generateControllers */])(__WEBPACK_IMPORTED_MODULE_1__user_model__["a" /* User */]));
+
+/***/ }),
+
+/***/ "./src/api/resources/user/user.model.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return User; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__("mongoose");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+
+var userSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+  username: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  passwordHash: {
+    required: true,
+    type: String
+  }
+}, { timestamps: true });
+
+userSchema.methods = {
+  authenticate: function authenticate(plainTextPassword) {
+    return bcrypt.compareSync(plainTextPassword, this.password);
+  },
+  hashPassword: function hashPassword(plainTextPassword) {
+    if (!plainTextPassword) {
+      throw new Error('Could not save user');
+    }
+
+    var salt = bcrypt.genSaltSync(10);
+    return bcrypt.hashSync(plainTextPassword, salt);
+  }
+};
+
+var User = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('user', userSchema);
+
+/***/ }),
+
+/***/ "./src/api/resources/user/user.restRouter.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return userRouter; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__("express");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_controller__ = __webpack_require__("./src/api/resources/user/user.controller.js");
+
+
+
+var userRouter = __WEBPACK_IMPORTED_MODULE_0_express___default.a.Router();
+
+userRouter.param('id', __WEBPACK_IMPORTED_MODULE_1__user_controller__["a" /* default */].findByParam);
+
+userRouter.route('/').get(__WEBPACK_IMPORTED_MODULE_1__user_controller__["a" /* default */].getAll).post(__WEBPACK_IMPORTED_MODULE_1__user_controller__["a" /* default */].createOne);
+
+userRouter.route('/:id').get(__WEBPACK_IMPORTED_MODULE_1__user_controller__["a" /* default */].getOne).put(__WEBPACK_IMPORTED_MODULE_1__user_controller__["a" /* default */].updateOne).delete(__WEBPACK_IMPORTED_MODULE_1__user_controller__["a" /* default */].createOne);
+
+/***/ }),
+
+/***/ "./src/api/restRouter.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return restRouter; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__("express");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resources_user__ = __webpack_require__("./src/api/resources/user/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_errorHandler__ = __webpack_require__("./src/api/modules/errorHandler.js");
+
+
+// import { songRouter } from './resources/song'
+// import { playlistRouter } from './resources/playlist'
+
+
+var restRouter = __WEBPACK_IMPORTED_MODULE_0_express___default.a.Router();
+
+restRouter.use('/user', __WEBPACK_IMPORTED_MODULE_1__resources_user__["a" /* userRouter */]);
+// restRouter.use('/song', songRouter)
+// restRouter.use('/playlist', playlistRouter)
+restRouter.use(__WEBPACK_IMPORTED_MODULE_2__modules_errorHandler__["a" /* apiErrorHandler */]);
+
+/***/ }),
+
+/***/ "./src/config/dev.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
+var config = {
+  expireTime: '30d',
+  secrets: {
+    JWT_SECRET: 'yeezy350boost'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/config/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_merge__ = __webpack_require__("lodash.merge");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_merge___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_merge__);
+
+
+var env = Object({"BUILD_TARGET":"server"}).NODE_ENV || 'development';
+
+var baseConfig = {
+  port: 3000,
+  secrets: {},
+  db: {
+    url: 'mongodb://localhost/jams'
+  }
+};
+
+var envConfig = {};
+
+switch (env) {
+  case 'development':
+  case 'dev':
+    envConfig = __webpack_require__("./src/config/dev.js").config;
+    break;
+  case 'test':
+  case 'testing':
+    envConfig = __webpack_require__("./src/config/testing.js").config;
+    break;
+  case 'prod':
+  case 'production':
+    envConfig = __webpack_require__("./src/config/prod.js").config;
+  default:
+    envConfig = __webpack_require__("./src/config/dev.js").config;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_lodash_merge___default()(baseConfig, envConfig));
+
+/***/ }),
+
+/***/ "./src/config/prod.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
+var config = {};
+
+/***/ }),
+
+/***/ "./src/config/testing.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
+var config = {
+  expireTime: '30d',
+  secrets: {
+    JWT_SECRET: 'yeezy350boost'
+  },
+  db: {
+    url: 'mongodb://localhost/jams-test'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/db.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return connect; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__("mongoose");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__("./src/config/index.js");
+
+
+__WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Promise = global.Promise;
+
+var connect = function connect() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */];
+
+  return __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connect(config.db.url, {
+    useMongoClient: true
+  });
+};
+
+/***/ }),
+
+/***/ "./src/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_http__ = __webpack_require__("http");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_http___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_http__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__server__ = __webpack_require__("./src/server.js");
+
+
+
+
+
+var server = __WEBPACK_IMPORTED_MODULE_0_http___default.a.createServer(__WEBPACK_IMPORTED_MODULE_1__server__["default"]);
+var currentApp = __WEBPACK_IMPORTED_MODULE_1__server__["default"];
+
+server.listen(3000, function () {
+	console.log('Server listening on port 3000');
+});
+
+if (true) {
+	module.hot.accept(["./src/server.js"], function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ __WEBPACK_IMPORTED_MODULE_1__server__ = __webpack_require__("./src/server.js"); (function () {
+		server.removeListener('request', currentApp);
+		server.on('request', __WEBPACK_IMPORTED_MODULE_1__server__["default"]);
+		currentApp = __WEBPACK_IMPORTED_MODULE_1__server__["default"];
+	})(__WEBPACK_OUTDATED_DEPENDENCIES__); });
+}
+
+/***/ }),
+
+/***/ "./src/middleware.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_body_parser__ = __webpack_require__("body-parser");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_body_parser__);
+
+
+var setGlobalMiddleware = function setGlobalMiddleware(app) {
+	app.use(__WEBPACK_IMPORTED_MODULE_0_body_parser___default.a.urlencoded({ extended: true }));
+	app.use(__WEBPACK_IMPORTED_MODULE_0_body_parser___default.a.json());
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (setGlobalMiddleware);
+
+/***/ }),
+
+/***/ "./src/server.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__("express");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__middleware__ = __webpack_require__("./src/middleware.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api__ = __webpack_require__("./src/api/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__db__ = __webpack_require__("./src/db.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__api_modules_auth__ = __webpack_require__("./src/api/modules/auth.js");
+
+
+
+
+
+
+var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
+
+Object(__WEBPACK_IMPORTED_MODULE_1__middleware__["a" /* default */])(app);
+Object(__WEBPACK_IMPORTED_MODULE_3__db__["a" /* connect */])();
+
+app.use('/signin', __WEBPACK_IMPORTED_MODULE_4__api_modules_auth__["a" /* signin */]);
+app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* restRouter */]);
+
+app.all('*', function (req, res) {
+	res.json({ ok: true });
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (app);
+
+/***/ }),
+
+/***/ 0:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("./node_modules/webpack/hot/poll.js?1000");
+module.exports = __webpack_require__("./src/index.js");
+
+
+/***/ }),
+
+/***/ "babel-runtime/core-js/promise":
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/core-js/promise");
+
+/***/ }),
+
+/***/ "babel-runtime/helpers/asyncToGenerator":
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/helpers/asyncToGenerator");
+
+/***/ }),
+
+/***/ "babel-runtime/helpers/extends":
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/helpers/extends");
+
+/***/ }),
+
+/***/ "babel-runtime/regenerator":
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/regenerator");
+
+/***/ }),
+
+/***/ "body-parser":
+/***/ (function(module, exports) {
+
+module.exports = require("body-parser");
+
+/***/ }),
+
+/***/ "express":
+/***/ (function(module, exports) {
+
+module.exports = require("express");
+
+/***/ }),
+
+/***/ "express-jwt":
+/***/ (function(module, exports) {
+
+module.exports = require("express-jwt");
+
+/***/ }),
+
+/***/ "http":
+/***/ (function(module, exports) {
+
+module.exports = require("http");
+
+/***/ }),
+
+/***/ "jsonwebtoken":
+/***/ (function(module, exports) {
+
+module.exports = require("jsonwebtoken");
+
+/***/ }),
+
+/***/ "lodash.merge":
+/***/ (function(module, exports) {
+
+module.exports = require("lodash.merge");
+
+/***/ }),
+
+/***/ "mongoose":
+/***/ (function(module, exports) {
+
+module.exports = require("mongoose");
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=server.js.map

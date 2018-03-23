@@ -10,7 +10,10 @@ setupMiddleware(app)
 connect()
 
 app.use('/signin', signin);
+app.use('/api', restRouter);
 
 app.all('*', (req, res) => {
 	res.json({ ok: true })
 });
+
+export default app
