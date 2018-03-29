@@ -108,7 +108,7 @@ Redux Saga wraps generators automatically
 Co.js can wrap generators outside of Redux-Saga app
 
 ```javascript
-var delayGenerator function* () {
+var delayGenerator = function* () {
 	let data1 = yield delay(1000, 1);
 	console.info('Step 1');
 	let data2 = yield delay(2000, 2);
@@ -122,6 +122,33 @@ var ob = delayGenerator();
 run(delayGenerator);
 var wrapped = co.wrap(delayGenerator);
 ```
+
+```javasript
+
+function* getData() {
+	let data = uield api.call('/cart');
+	return data + 5;
+}
+
+let gen = getData();
+let promise = gen.next();
+promise.then(data => {
+	let value = gen.next(data);
+})
+
+function* mySaga() {
+	yield delay(500);
+	yield delay(700);
+	console.log('Saga complete');
+}
+
+```
+
+
+#### Wrapping Generatos with Redux Saga and Co 
+
+
+
 
 ## Redux Saga Effects
 
