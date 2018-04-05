@@ -248,4 +248,83 @@ let saga = function* () {
 run(saga)
 ```
 
+## Implementing for in our Workflow
+
+User's list of items in cart (as IDs) returned from AJAX call
+
+Saga forks one process each to fetch item details for each item
+
+Item details are displayed to user as they arrive from server.
+
+#### Demo
+
+Create fetch cart saga which gets list of item IDS in the user's cart.
+
+```javascript
+import { take, put } from "redux-saga/effects";
+import fetch from "isomorphic-fetch";
+
+import { SET_CURRENT_USER, setCartItems } from "./../actions";
+
+export function* fetchCartSaga() {
+  const { user } = yield take(SET_CURRENT_USER);
+  const { id } = user;
+  const response = yield fetch(`http://localhost:8081/cart/${id}`);
+  const { items } = yield response.json();
+  yield put(setCartItems(items));
+}
+```
+
+Create separate item details saga which for each item ID requested and fetches those details.
+
+```javascript
+import { take, fork, put } from "redux-saga/effects";
+import fetch from "isomorphic-fetch";
+
+import { SET_CART_ITEMS, setItemDetails } from "./../actions";
+
+export function* loadItemDetails(item) {
+  console.info("Item?", item);
+  const { id } = item;
+  const response = yield fetch(`http://localhost:8081/items/${id}`);
+  const data = yield response.json();
+  const info = data[0];
+  yield put(setItemDetails(info));
+}
+
+export function* itemDetailsSaga() {
+  const { items } = yield take(SET_CART_ITEMS);
+  yield items.map(item => fork(loadItemDetails, item));
+}
+```
+
+## takeEvery
+
+Works like take, excepts forks the specified method every time specified action is dispatched.
+
+Code execution resumes immediately in main thread.
+
+#### Demo
+
+Create a saga that invokes a method each time a specified action is dispatched 
+
+Note how multiple threads can be created.
+
+Note that the thread where TakeEvery is called resumes immediately.
+
+```javascript
+let process = function* () {
+	while (true) {
+		console.log('Process loop');
+		yield delay(1000);
+	}
+}
+
+let saga = function* () {
+	yield effects.takeEvery('START_PROCESS', process);
+	console.log('Saga got to the end')
+}
+```
+
+
 
