@@ -2,7 +2,7 @@ const knex = require('../connection')
 
 function getAllMovies() {
 	return knex('movies')
-		.select('*')
+		.select('*');
 }
 
 function getSingleMovie(id) {
@@ -26,8 +26,8 @@ function updateMovie(id, movie) {
 
 function deleteMovie(id) {
   return knex('movies')
-	  .del()
 	  .where({ id: parseInt(id) })
+	  .del()
 	  .returning('*');
 }
 

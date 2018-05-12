@@ -166,9 +166,9 @@ describe('routes : movies', () => {
 							res.body.data[0].should.include.keys(
 								'id', 'name', 'genre', 'rating', 'explicit',
 							)
-							knex(movies).select('*')
+							knex('movies').select('*')
 								.then(updatedMovies => {
-									updatedMovies.length.should.eql(lengthBeforeDelete - 1)
+									updatedMovies.length.should.eql(lengthBeforeDelete - 1);
 									done();
 								})
 						});
