@@ -1,0 +1,9 @@
+[
+  "func/test_add.py::test_add", 
+  "func/test_api_exceptions.py::test_add_raises", 
+  "func/test_api_exceptions.py::test_start_tasks_db_raises", 
+  "func/test_api_exceptions.py::test_list_raises", 
+  "func/test_api_exceptions.py::test_get_raises", 
+  "unit/test_task_fail.py::test_task_quality", 
+  "unit/test_task_fail.py::test_dict_equality"
+]

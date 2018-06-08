@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Creating Mailing List
+{% endblock %}
+
+{% block body %}
+    <h1> Create Mailing List </h1>
+    <form method="post" class="col-sm-4">
+        {% csrf_token %}
+        {{ form | cripsy }}
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+{% endblock %}

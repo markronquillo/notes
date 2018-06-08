@@ -1,0 +1,4 @@
+[
+  "tasks/test_three.py::test_defaults", 
+  "tasks/test_three.py::test_member_access"
+]

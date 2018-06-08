@@ -1,0 +1,6 @@
+[
+  "test_four.py::test_asdict", 
+  "test_four.py::test_replace", 
+  "test_three.py::test_defaults", 
+  "test_three.py::test_member_access"
+]
