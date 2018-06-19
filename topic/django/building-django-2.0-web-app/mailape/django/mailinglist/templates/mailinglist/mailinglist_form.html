@@ -10,7 +10,7 @@
     <h1> Create Mailing List </h1>
     <form method="post" class="col-sm-4">
         {% csrf_token %}
-        {{ form | cripsy }}
+        {{ form | crispy }}
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 {% endblock %}

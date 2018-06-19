@@ -1,21 +1,34 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DeleteView, CreateView, DetailView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.shortcuts import get_object_or_404
 
-from mailinglist.forms import MailingListForm, SubscriberForm
+from mailinglist.forms import MailingListForm, SubscriberForm, MessageForm
 
 from mailinglist.mixins import UserCanUseMailingList
-from mailinglist.models import MailingList, Subscriber
+from mailinglist.models import MailingList, Subscriber, Message
 
 
 class MailingListListView(LoginRequiredMixin, ListView):
+    """
+    To help the view know what to list, we override the get_queryset() method
+    and return a QuerySet that includes only thte mailinglist owned by the 
+    currently logged in user
+    """
     def get_queryset(self):
         return MailingList.objects.filter(owner=self.request.user)
 
 
 class CreateMailingListView(LoginRequiredMixin, CreateView):
+    """
+    When CreateView instantiates our MailingListForm, CreateView 
+    calls its get_initial() method to get the initial data for the form.
+
+    We use this hook to make sure that the form's owner is set to the logged in 
+    user's id.
+    """
     form_class = MailingListForm
-    template = 'mailinglist/mailinglist_form.html'
+    template_name = 'mailinglist/mailinglist_form.html'
 
     def get_initial(self):
         return {
@@ -53,7 +66,7 @@ class SubscribeToMailingListView(CreateView):
 
 class ThankYouForSubscribingView(DetailView):
     model = MailingList
-    template_name = 'mailing/subscription_thankyou.html'
+    template_name = 'mailinglist/subscription_thankyou.html'
 
 
 class ConfirmSubscriptionView(DetailView):
@@ -71,7 +84,7 @@ class UnsubscribeView(DeleteView):
     template_name = 'mailinglist/unsubscribe.html'
 
     def get_success_url(self):
-        mailing_list self.object.mailing_list
+        mailing_list = self.object.mailing_list
         return reverse('mailinglist:subscribe', kwargs={
             'mailinglist_pk': mailing_list.id
         })
@@ -85,6 +98,10 @@ class CreateMessageView(LoginRequiredMixin, CreateView):
     template_name = 'mailinglist/message_form.html'
 
     def get_success_url(self):
+        """
+        After a message is successfully created, 
+        we'll redirect our users to the management page of the MailingList
+        """
         return reverse('mailinglist:manage_mailinglist', kwargs={'pk': self.object.mailing_list.id})
 
 
@@ -95,6 +112,9 @@ class CreateMessageView(LoginRequiredMixin, CreateView):
         }
 
     def get_context_data(self, **kwargs):
+        """
+        Provides extra variables to the template's context.
+        """
         ctx = super().get_context_data(**kwargs)
         mailing_list = self.get_mailing_list()
         ctx.update({
@@ -117,6 +137,11 @@ class CreateMessageView(LoginRequiredMixin, CreateView):
 
     
     def get_mailing_list(self):
+        """
+        To prevent logged in but unauthorized users from sending messages,
+        we will create a central `get_mailing_list()` method which checkes that
+        the logged in user can use this mailing list.
+        """
         mailing_list = get_object_or_404(MailingList, id=self.kwargs['mailinglist_pk'])
 
         if not mailing_list.user_can_use_mailing_list(self.request.user):
@@ -124,4 +149,5 @@ class CreateMessageView(LoginRequiredMixin, CreateView):
         return mailing_list
 
 
-        
+class MessageDetailView(LoginRequiredMixin, UserCanUseMailingList, DetailView):
+    model = Message

@@ -6,6 +6,9 @@ from django.urls import reverse
 
 
 class MailingList(models.Model):
+    """
+    The MailingList model will represent a mailing list that one of our users has created.
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     owner = models.ForeignKey(
@@ -19,16 +22,25 @@ class MailingList(models.Model):
             'mailinglist:manage_mailinglist', kwargs={'pk': self.id})
 
     def user_can_use_mailing_list(self, user):
+        """
+        Convenience method that checks whether the given user is the owner
+        """
         return user == self.owner
 
 
 class Subscriber(models.Model):
+    """
+    A Subscriber model can only belong to one MailingList and must confirm their subscription
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField()
     confirmed = models.BooleanField(default=False)
     mailing_list = models.ForeignKey(to=MailingList, on_delete=models.CASCADE)
 
     class Meta:
+        """
+        A Meta class information to lets us add additional constraint etc to our model
+        """
         unique_together = [
             'email',
             'mailing_list',
